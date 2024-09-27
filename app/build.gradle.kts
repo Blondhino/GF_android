@@ -1,6 +1,9 @@
+import versioning.Versioning
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.gf.android.versioning)
 }
 
 android {
@@ -11,8 +14,8 @@ android {
         applicationId = "com.gadgetfactory.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = Versioning(project.rootDir.path).readVersion().versionCode
+        versionName = Versioning(project.rootDir.path).readVersion().versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

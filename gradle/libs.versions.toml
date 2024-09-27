@@ -32,4 +32,4 @@ androidx-splash = { group = "androidx.core", name = "core-splashscreen", version
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+gf-android-versioning = {id = "gf.android.versioning", version = "unspecified"}
