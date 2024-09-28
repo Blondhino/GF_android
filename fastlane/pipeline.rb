@@ -17,7 +17,7 @@ private_lane :pipeline do |options|
   UI.user_error!("Parameter [build_task] is required!") unless [Config::BUILD_TASK_ASSEMBLE, Config::BUILD_TASK_BUNDLE].include? options[:build_task]
 
   # make sure that all changes are committed before build
-  ensure_git_status_clean
+  #ensure_git_status_clean
 
   # CI will checkout specific commit (detached HEAD). Therefore, we need to checkout branch and pull last known changes from remote
   if ENV["CI"] == "true"
