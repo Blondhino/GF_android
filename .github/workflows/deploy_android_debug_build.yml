@@ -7,7 +7,7 @@ jobs:
   deploy_app:
     runs-on: ubuntu-latest
     env:
-      GOOGLE_APPLICATION_CREDENTIALS_BASE64: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}'
+      GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
     steps:
       - uses: actions/checkout@v3
 
