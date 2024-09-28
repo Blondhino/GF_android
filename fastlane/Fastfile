@@ -1,0 +1,34 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+require 'yaml'
+import './config.rb'
+import './pipeline.rb'
+
+
+lane :deployAndroidToFirebase do
+ pipeline(
+      #constant defines if build needs to be signed by release.keystore
+      build_type: Config::BUILD_TYPE_DEBUG,
+      #assemble will build apk and bundle aab
+      build_task: Config::BUILD_TASK_ASSEMBLE,
+      #to upload apks to firebase distribution
+      distribute_by_firebase_distribution: true,
+      #Firebase app id
+      firebase_app_id: Config::FIREBASE_APP_ID,
+      #Increase app version number
+      version_bump: Config::BUMP_BUILD,
+      vcs: true,
+    )
+end

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "718845446517",
+    "project_id": "gadget-factory-aaf0c",
+    "storage_bucket": "gadget-factory-aaf0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:718845446517:android:5ff0471196027d8698ab3c",
+        "android_client_info": {
+          "package_name": "com.gadgetfactory.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "718845446517-btfo204pfq1ro544ls4gsjsjf3sk480f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfSVmkBXQHAPbgRAxoGgAtexc3x5sfpUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "718845446517-btfo204pfq1ro544ls4gsjsjf3sk480f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
