@@ -1,6 +1,10 @@
+import versioning.Versioning
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.gf.android.versioning)
+    id(libs.plugins.google.services.get().pluginId)
 }
 
 android {
@@ -11,8 +15,8 @@ android {
         applicationId = "com.gadgetfactory.app"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = Versioning(project.rootDir.path).readVersion().versionCode
+        versionName = Versioning(project.rootDir.path).readVersion().versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -60,6 +64,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.splash)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
