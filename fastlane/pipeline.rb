@@ -29,10 +29,6 @@ private_lane :pipeline do |options|
     sh "git pull"
   end
 
-  sh "chmod +x ./gradle"
-  # clean build directory
-  gradle(task: 'clean')
-
   # bump build version (ensure default)
    if !options[:version_bump].nil?
      bump_type = options[:version_bump]
