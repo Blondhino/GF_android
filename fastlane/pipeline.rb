@@ -29,7 +29,7 @@ private_lane :pipeline do |options|
     sh "git pull"
   end
 
-  sh "chmod +x ./gradlew"
+  sh "chmod +x ./gradle"
   # clean build directory
   gradle(task: 'clean')
 
