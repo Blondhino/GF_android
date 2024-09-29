@@ -94,10 +94,4 @@ private_lane :pipeline do |options|
       )
     end
 
-    # Reset git repo to a clean state, discarding any uncommitted and untracked changes.
-    # If vcs flag is used required files are committed and paused prior to this command.
-    # All other files will be reset by this command (e.g. app icons changed by badge)
-    # skip_clean ('git clean') to avoid removing untracked files like `.properties`
-    reset_git_repo(skip_clean: true)
-
 end
