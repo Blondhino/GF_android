@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
       - name: Configure GIT
         run: |
           git config --local user.email "github-actions@users.noreply.github.com"
