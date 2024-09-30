@@ -11,6 +11,7 @@ activityCompose = "1.9.2"
 composeBom = "2024.09.02"
 splash = "1.2.0-alpha02"
 googleServices = "4.4.2"
+voyager = "1.1.0-beta02"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,6 +31,11 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
+voyager-koin = { group = "cafe.adriel.voyager", name = "voyager-koin", version.ref = "voyager" }
+voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator", version.ref = "voyager" }
+voyager-tab-navigator = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
+voyager-screenmodel = { group = "cafe.adriel.voyager", name = "voyager-screenmodel", version.ref = "voyager" }
+voyager-botom-sheet-navigator = { group = "cafe.adriel.voyager", name = "voyager-bottom-sheet-navigator", version.ref = "voyager" }
 
 
 
@@ -38,3 +44,13 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 gf-android-versioning = { id = "gf.android.versioning", version = "unspecified" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+
+[bundles]
+
+voyager = [
+    "voyager-koin",
+    "voyager-navigator",
+    "voyager-tab-navigator",
+    "voyager-screenmodel",
+    "voyager-botom-sheet-navigator"
+]
