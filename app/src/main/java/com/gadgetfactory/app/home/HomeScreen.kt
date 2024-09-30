@@ -25,7 +25,7 @@ class HomeScreen : Screen {
                     .fillMaxWidth()
                     .align(Alignment.Center),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Text("Home screen")
                 Button(onClick = {
@@ -36,5 +36,4 @@ class HomeScreen : Screen {
             }
         }
     }
-
 }

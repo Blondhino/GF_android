@@ -12,6 +12,10 @@ composeBom = "2024.09.02"
 splash = "1.2.0-alpha02"
 googleServices = "4.4.2"
 voyager = "1.1.0-beta02"
+ktlintCli = "1.2.1"
+detekt = "1.23.6"
+detektFormatting = "1.23.6"
+detektCompose = "0.3.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,14 +40,16 @@ voyager-navigator = { group = "cafe.adriel.voyager", name = "voyager-navigator",
 voyager-tab-navigator = { group = "cafe.adriel.voyager", name = "voyager-tab-navigator", version.ref = "voyager" }
 voyager-screenmodel = { group = "cafe.adriel.voyager", name = "voyager-screenmodel", version.ref = "voyager" }
 voyager-botom-sheet-navigator = { group = "cafe.adriel.voyager", name = "voyager-bottom-sheet-navigator", version.ref = "voyager" }
-
-
+ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCli" }
+detekt-compose = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detektFormatting" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 gf-android-versioning = { id = "gf.android.versioning", version = "unspecified" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [bundles]
 
