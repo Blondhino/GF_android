@@ -1,10 +1,10 @@
-name: Deploy Android Release (BUILD)
+name: Deploy Android Release (PATCH)
 
 on:
   workflow_dispatch:
 
 jobs:
-  deploy_app_build:
+  deploy_release_app_patch:
     runs-on: ubuntu-latest
     env:
       GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
@@ -52,4 +52,4 @@ jobs:
       - name: Distribute dev app
         run: |
           bundle install
-          bundle exec fastlane deployAndroidReleaseBuildToFirebase
+          bundle exec fastlane deployAndroidReleasePatchToFirebase

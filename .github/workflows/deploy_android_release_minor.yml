@@ -1,0 +1,55 @@
+name: Deploy Android Release (MINOR)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy_release_app_minor:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
+      GF_ANDROID_STORE_PASS: ${{ secrets.GF_ANDROID_STORE_PASS}}
+      GF_ANDROID_KEY_PASS: ${{ secrets.GF_ANDROID_KEY_PASS }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Configure GIT
+        run: |
+          git config --local user.email "github-actions@users.noreply.github.com"
+          git config --local user.name "github-actions"
+
+      - name: Add credentials
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS_BASE64 | base64 --decode > credentials.json
+
+      - name: Save credentials into environment variables
+        run: |
+          echo "GOOGLE_APPLICATION_CREDENTIALS=./credentials.json" >> $GITHUB_ENV
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+
+      - name: Install Fastlane
+        run: gem install fastlane
+
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 30
+          build-tools: 30.0.3
+
+      - name: Distribute dev app
+        run: |
+          bundle install
+          bundle exec fastlane deployAndroidReleaseMinorToFirebase

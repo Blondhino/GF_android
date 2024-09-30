@@ -97,3 +97,50 @@ lane :deployAndroidReleaseBuildToFirebase do
     )
 end
 
+lane :deployAndroidReleasePatchToFirebase do
+ pipeline(
+      #constant defines if build needs to be signed by release.keystore
+      build_type: Config::BUILD_TYPE_RELEASE,
+      #assemble will build apk and bundle aab
+      build_task: Config::BUILD_TASK_ASSEMBLE,
+      #to upload apks to firebase distribution
+      distribute_by_firebase_distribution: true,
+      #Firebase app id
+      firebase_app_id: Config::FIREBASE_APP_ID,
+      #Increase app version number
+      version_bump: Config::BUMP_PATCH,
+      vcs: true,
+    )
+end
+
+lane :deployAndroidReleaseMinorToFirebase do
+ pipeline(
+      #constant defines if build needs to be signed by release.keystore
+      build_type: Config::BUILD_TYPE_RELEASE,
+      #assemble will build apk and bundle aab
+      build_task: Config::BUILD_TASK_ASSEMBLE,
+      #to upload apks to firebase distribution
+      distribute_by_firebase_distribution: true,
+      #Firebase app id
+      firebase_app_id: Config::FIREBASE_APP_ID,
+      #Increase app version number
+      version_bump: Config::BUMP_MINOR,
+      vcs: true,
+    )
+end
+
+lane :deployAndroidReleaseMajorToFirebase do
+ pipeline(
+      #constant defines if build needs to be signed by release.keystore
+      build_type: Config::BUILD_TYPE_RELEASE,
+      #assemble will build apk and bundle aab
+      build_task: Config::BUILD_TASK_ASSEMBLE,
+      #to upload apks to firebase distribution
+      distribute_by_firebase_distribution: true,
+      #Firebase app id
+      firebase_app_id: Config::FIREBASE_APP_ID,
+      #Increase app version number
+      version_bump: Config::BUMP_MAJOR,
+      vcs: true,
+    )
+end
