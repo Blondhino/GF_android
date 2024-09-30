@@ -1,0 +1,20 @@
+name: PR Checks
+
+on:
+  workflow_dispatch:
+
+jobs:
+  static_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
+      - name: Static Analysis
+        run: |
+          bundle install
+          ./gradlew ktlint
+          ./gradlew detekt
+

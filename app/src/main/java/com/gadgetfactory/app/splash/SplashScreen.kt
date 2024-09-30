@@ -28,13 +28,13 @@ class SplashScreen : Screen {
                 contentDescription = null,
                 modifier = Modifier
                     .size(110.dp)
-                    .align(Alignment.Center)
+                    .align(Alignment.Center),
             )
             Button(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(horizontal = 16.dp, vertical = 32.dp),
-                onClick = { navigator.push(HomeScreen()) }
+                onClick = { navigator.push(HomeScreen()) },
             ) {
                 Text("Go to Home")
             }
