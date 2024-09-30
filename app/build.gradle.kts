@@ -24,6 +24,22 @@ android {
         }
     }
 
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("../release/debug.keystore")
+            keyAlias = "gf_keystore"
+            storePassword = "debugPass"
+            keyPassword = "debugPass"
+        }
+
+        create("release") {
+            storeFile = project.rootProject.file("release/release.keystore")
+            keyAlias = "gf_keystore"
+            storePassword = System.getenv("GF_ANDROID_STORE_PASS")
+            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
