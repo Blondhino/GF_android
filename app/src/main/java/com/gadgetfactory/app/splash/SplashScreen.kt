@@ -36,7 +36,7 @@ class SplashScreen : Screen {
                     .padding(horizontal = 16.dp, vertical = 32.dp),
                 onClick = { navigator.push(HomeScreen()) },
             ) {
-                Text("Go to Home")
+                Text("Go to Home !")
             }
         }
     }
