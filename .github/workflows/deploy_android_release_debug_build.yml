@@ -52,4 +52,4 @@ jobs:
       - name: Distribute dev app
         run: |
           bundle install
-          bundle exec fastlane deployAndroidBuildToFirebase
+          bundle exec fastlane deployAndroidReleaseBuildToFirebase
