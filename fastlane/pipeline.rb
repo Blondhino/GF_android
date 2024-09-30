@@ -67,9 +67,9 @@ private_lane :pipeline do |options|
       # upload build to Firebase App Distribution and share it with tester group
       UI.message "[INFO] APK PATH: #{apk_path}"
       firebase_app_distribution(
-        firebase_cli_token: "1//09Sy_TqN8N4rsCgYIARAAGAkSNwF-L9Ir2hJ3_ANM5tXvuFqtNZaaIHdlrZeykYL9RFCzuPLe8ucpOKQ3qH3Cw1G_7PIp3PA9kok",
         apk_path: apk_path,
         app: firebase_distribution_app,
+        groups: Config::TESTERS_GROUP
         )
     }
   end

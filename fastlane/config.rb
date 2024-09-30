@@ -27,4 +27,7 @@ class Config
     GIT_REPO = "git@github.com:Blondhino/GF_android.git"
     GIT_REPO_TOKEN_URL_SUFFIX = "@github.com/Blondhino/GF_android.git"
 
+    #Firebase
+    TESTERS_GROUP = "apartment-6"
+
 end
