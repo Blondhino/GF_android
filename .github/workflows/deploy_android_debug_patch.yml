@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy_app_build:
+  deploy_app_patch:
     runs-on: ubuntu-latest
     env:
       GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
@@ -50,4 +50,4 @@ jobs:
       - name: Distribute dev app
         run: |
           bundle install
-          bundle exec fastlane deployAndroidBuildToFirebase
+          bundle exec fastlane deployAndroidPatchToFirebase
