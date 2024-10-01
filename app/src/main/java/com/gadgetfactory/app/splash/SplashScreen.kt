@@ -18,6 +18,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.home.HomeScreen
+import com.gadgetfactory.app.ui.components.BodyMediumText
 
 class SplashScreen : Screen {
     @Composable
@@ -32,8 +33,10 @@ class SplashScreen : Screen {
                     .size(110.dp)
                     .align(Alignment.Center),
             )
-            Text(
-                modifier = Modifier.align(Alignment.Center).padding(top = 120.dp),
+            BodyMediumText(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(top = 120.dp),
                 text = "Splash screen + ${viewModel.getText()}",
             )
             Button(
