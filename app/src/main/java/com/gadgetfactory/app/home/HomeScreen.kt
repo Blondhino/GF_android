@@ -15,13 +15,12 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import org.koin.compose.koinInject
 
 class HomeScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel : HomeViewModel = koinScreenModel()
+        val viewModel: HomeViewModel = koinScreenModel()
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
