@@ -16,6 +16,7 @@ ktlintCli = "1.2.1"
 detekt = "1.23.6"
 detektFormatting = "1.23.6"
 detektCompose = "0.3.13"
+koin = "3.5.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,9 @@ voyager-botom-sheet-navigator = { group = "cafe.adriel.voyager", name = "voyager
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCli" }
 detekt-compose = { module = "io.nlopez.compose.rules:detekt", version.ref = "detektCompose" }
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detektFormatting" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -60,3 +64,5 @@ voyager = [
     "voyager-screenmodel",
     "voyager-botom-sheet-navigator"
 ]
+
+koin-app = ["koin-core","koin-android", "koin-compose"]
