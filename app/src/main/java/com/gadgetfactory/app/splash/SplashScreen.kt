@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.R
@@ -22,6 +23,7 @@ class SplashScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val viewModel: SplashViewModel = koinScreenModel()
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = painterResource(R.drawable.ic_app_icon_with_background),
@@ -29,6 +31,10 @@ class SplashScreen : Screen {
                 modifier = Modifier
                     .size(110.dp)
                     .align(Alignment.Center),
+            )
+            Text(
+                modifier = Modifier.align(Alignment.Center).padding(top = 120.dp),
+                text = "Splash screen + ${viewModel.getText()}",
             )
             Button(
                 modifier = Modifier
