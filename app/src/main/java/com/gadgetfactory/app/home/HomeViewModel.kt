@@ -4,5 +4,7 @@ import cafe.adriel.voyager.core.model.ScreenModel
 
 class HomeViewModel : ScreenModel {
 
-    fun getText() = "Home View Model"
+    fun getText() = TEXT
 }
+
+private const val TEXT = "Home View Model"
