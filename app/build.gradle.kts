@@ -35,16 +35,16 @@ android {
         create("release") {
             storeFile = project.rootProject.file("release/release.keystore")
             keyAlias = "gf_keystore"
-//            storePassword = System.getenv("GF_ANDROID_STORE_PASS")
-//            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")
-            storePassword ="tbmly5qjej5C!"
-            keyPassword = "tbmly5qjej5C!"
+            storePassword = System.getenv("GF_ANDROID_STORE_PASS")
+            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")
         }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
+            isDebuggable = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
