@@ -25,7 +25,10 @@ class SplashScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val viewModel: SplashViewModel = koinScreenModel()
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+        ) {
             Image(
                 imageType = Resource(R.drawable.ic_app_icon_with_background),
                 contentDescription = null,
