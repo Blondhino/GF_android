@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
-      GF_ANDROID_STORE_PASS: ${{ secrets.GF_ANDROID_STORE_PASS}}
+      GF_ANDROID_STORE_PASS: ${{ secrets.GF_ANDROID_STORE_PASS }}
       GF_ANDROID_KEY_PASS: ${{ secrets.GF_ANDROID_KEY_PASS }}
     steps:
       - uses: actions/checkout@v3
