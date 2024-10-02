@@ -35,8 +35,10 @@ android {
         create("release") {
             storeFile = project.rootProject.file("release/release.keystore")
             keyAlias = "gf_keystore"
-            storePassword = System.getenv("GF_ANDROID_STORE_PASS")
-            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")
+//            storePassword = System.getenv("GF_ANDROID_STORE_PASS")
+//            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")
+            storePassword ="tbmly5qjej5C!"
+            keyPassword = "tbmly5qjej5C!"
         }
     }
 
