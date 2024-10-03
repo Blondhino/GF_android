@@ -2,7 +2,6 @@ package com.gadgetfactory.app.ui.theme
 
 import androidx.activity.ComponentActivity
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -10,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.gadgetfactory.app.ui.components.ApplicationContainer
 
 private val DarkColorScheme = darkColorScheme(
     surface = Onyx,
@@ -34,10 +34,10 @@ fun GadgetFactoryTheme(
         colorScheme = DarkColorScheme,
         typography = Typography,
         content = {
-            Surface(
+            ApplicationContainer(
                 modifier = modifier,
-                color = MaterialTheme.colorScheme.background,
-            ) { content() }
+                content = content,
+            )
         },
     )
 }
