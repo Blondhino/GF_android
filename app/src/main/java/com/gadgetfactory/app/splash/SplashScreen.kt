@@ -16,15 +16,21 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.home.HomeScreen
+import com.gadgetfactory.app.ui.components.BackgroundColorMode.Error
 import com.gadgetfactory.app.ui.components.BodyMediumText
 import com.gadgetfactory.app.ui.components.Image
 import com.gadgetfactory.app.ui.components.ImageType.Resource
+import com.gadgetfactory.app.ui.global.GlobalUi
+import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
+import org.koin.compose.koinInject
 
 class SplashScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val viewModel: SplashViewModel = koinScreenModel()
+        val globalUi: GlobalUi = koinInject()
+
         Box(
             modifier = Modifier
                 .fillMaxSize(),
@@ -46,7 +52,10 @@ class SplashScreen : Screen {
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(horizontal = 16.dp, vertical = 32.dp),
-                onClick = { navigator.push(HomeScreen()) },
+                onClick = {
+                    globalUi.tryEmitUiEvent(SetBackgroundColorMode(Error))
+                    navigator.push(HomeScreen())
+                },
             ) {
                 Text("Go to Home !")
             }
