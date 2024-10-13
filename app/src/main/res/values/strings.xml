@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Gadget Factory</string>
+    <string name="auth_screen_login_button_general_text">Continue with: </string>
+    <string name="auth_screen_google_login_button_text">Google</string>
+    <string name="general_something_went_wrong">Something went wrong !</string>
+    <string name="general_something_went_wrong_message">We are unable to process your request. Please try again later</string>
+    <string name="auth_screen_welcome_message">Welcome to</string>
+    <string name="general_app_name">Gadget Factory</string>
 </resources>

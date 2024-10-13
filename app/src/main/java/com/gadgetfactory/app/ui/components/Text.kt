@@ -28,29 +28,29 @@ val gfFont = FontFamily(
 
 val BodySmallTextStyle = TextStyle(
     fontFamily = gfFont,
-    fontSize = 12.sp,
-    lineHeight = 12.sp,
+    fontSize = 14.sp,
+    lineHeight = 16.sp,
     fontWeight = Normal,
 )
 
 val BodyMediumTextStyle = TextStyle(
     fontFamily = gfFont,
-    fontSize = 14.sp,
-    lineHeight = 14.sp,
+    fontSize = 16.sp,
+    lineHeight = 18.sp,
     fontWeight = Normal,
 )
 
 val BodyLargeTextStyle = TextStyle(
     fontFamily = gfFont,
-    fontSize = 16.sp,
-    lineHeight = 16.sp,
+    fontSize = 18.sp,
+    lineHeight = 20.sp,
     fontWeight = Normal,
 )
 
 val TitleLargeTextStyle = TextStyle(
     fontFamily = gfFont,
-    fontSize = 20.sp,
-    lineHeight = 20.sp,
+    fontSize = 22.sp,
+    lineHeight = 24.sp,
     fontWeight = SemiBold,
 )
 
