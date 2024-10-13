@@ -1,63 +1,26 @@
 package com.gadgetfactory.app.splash
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.gadgetfactory.app.R
-import com.gadgetfactory.app.home.HomeScreen
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Error
-import com.gadgetfactory.app.ui.components.BodyMediumText
-import com.gadgetfactory.app.ui.components.Image
-import com.gadgetfactory.app.ui.components.ImageType.Resource
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
-import org.koin.compose.koinInject
+import com.gadgetfactory.app.auth.ui.AuthScreen
+import com.gadgetfactory.app.gadgetcenter.GadgetCenterScreen
 
 class SplashScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val viewModel: SplashViewModel = koinScreenModel()
-        val globalUi: GlobalUi = koinInject()
+        val startDestination by viewModel.startDestination.collectAsState()
 
-        Box(
-            modifier = Modifier
-                .fillMaxSize(),
-        ) {
-            Image(
-                imageType = Resource(R.drawable.ic_app_icon_with_background),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(110.dp)
-                    .align(Alignment.Center),
-            )
-            BodyMediumText(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(top = 120.dp),
-                text = "Splash screen + ${viewModel.getText()}",
-            )
-            Button(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(horizontal = 16.dp, vertical = 32.dp),
-                onClick = {
-                    globalUi.tryEmitUiEvent(SetBackgroundColorMode(Error))
-                    navigator.push(HomeScreen())
-                },
-            ) {
-                Text("Go to Home !")
+        startDestination?.let {
+            when (it) {
+                StartDestination.Auth -> navigator.replace(AuthScreen())
+                StartDestination.GadgetCenter -> navigator.replace(GadgetCenterScreen())
             }
         }
     }

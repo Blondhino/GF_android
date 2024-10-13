@@ -1,6 +1,7 @@
 package com.gadgetfactory.app.ui.theme
 
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
@@ -16,12 +17,18 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = Steel,
     tertiary = Frost,
     background = Ebony,
+    secondary = Indigo,
+    error = Carmine,
+    scrim = Amber,
+    surfaceVariant = Lime,
+
 )
 
 @Composable
 fun GadgetFactoryTheme(
+    paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit = {},
 ) {
     val view = LocalView.current
     val activity = LocalContext.current as ComponentActivity
@@ -37,6 +44,7 @@ fun GadgetFactoryTheme(
             ApplicationContainer(
                 modifier = modifier,
                 content = content,
+                paddingValues = paddingValues,
             )
         },
     )

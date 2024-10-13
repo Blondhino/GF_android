@@ -5,6 +5,8 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -29,8 +31,9 @@ import kotlin.random.Random
 fun AnimatedGradientContainer(
     firstColor: Int,
     secondColor: Int,
-    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues,
     content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var screenWidth by rememberSaveable { mutableIntStateOf(0) }
     var screenHeight by remember { mutableIntStateOf(0) }
@@ -91,7 +94,8 @@ fun AnimatedGradientContainer(
                         radius = 400.dp.toPx(),
                     ),
                 )
-            },
+            }
+            .padding(paddingValues),
     ) {
         content()
     }

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.gf.android.versioning)
+    alias(libs.plugins.kotlinx.serialization)
     id(libs.plugins.google.services.get().pluginId)
 }
 
@@ -84,9 +85,15 @@ dependencies {
     implementation(libs.androidx.splash)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
     implementation(libs.bundles.voyager)
     implementation(libs.bundles.koin.app)
     implementation(libs.coil.compose)
+    implementation(libs.googleid)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.bundles.arrow)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
