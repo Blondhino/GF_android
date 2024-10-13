@@ -1,5 +1,6 @@
 package com.gadgetfactory.app.ui.components
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,8 +21,9 @@ import org.koin.compose.koinInject
 
 @Composable
 fun ApplicationContainer(
-    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues,
     content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val globalUi: GlobalUi = koinInject()
     var firstColor by rememberSaveable { mutableIntStateOf(Normal.colors.first().toArgb()) }
@@ -46,6 +48,7 @@ fun ApplicationContainer(
             content = content,
             firstColor = firstColor,
             secondColor = secondColor,
+            paddingValues = paddingValues,
         )
     }
 }
