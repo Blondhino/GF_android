@@ -27,8 +27,8 @@ private val DarkColorScheme = darkColorScheme(
 @Composable
 fun GadgetFactoryTheme(
     paddingValues: PaddingValues,
-    content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    content: @Composable () -> Unit = {},
 ) {
     val view = LocalView.current
     val activity = LocalContext.current as ComponentActivity
