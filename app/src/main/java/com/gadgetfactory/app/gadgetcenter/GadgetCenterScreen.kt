@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -17,6 +19,9 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.auth.domain.usecase.Logout
 import com.gadgetfactory.app.auth.ui.AuthScreen
 import com.gadgetfactory.app.ui.components.BodyMediumText
+import com.gadgetfactory.app.ui.global.GlobalUi
+import com.gadgetfactory.app.ui.global.GlobalUiEvent.HideHeader
+import com.gadgetfactory.app.ui.global.GlobalUiEvent.ShowHeader
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -26,6 +31,7 @@ class GadgetCenterScreen : Screen {
         val logout: Logout = koinInject()
         val scope = rememberCoroutineScope()
         val navigator = LocalNavigator.currentOrThrow
+        val globalUi: GlobalUi = koinInject()
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier.align(Alignment.Center),
@@ -43,7 +49,33 @@ class GadgetCenterScreen : Screen {
                 ) {
                     BodyMediumText("Logout", color = MaterialTheme.colorScheme.surface)
                 }
+
+                Button(
+                    onClick = { globalUi.tryEmitUiEvent(ShowHeader { HeaderContent() }) },
+                ) {
+                    BodyMediumText("Show Header", color = MaterialTheme.colorScheme.surface)
+                }
+
+                Button(
+                    onClick = { globalUi.tryEmitUiEvent(HideHeader) },
+                ) {
+                    BodyMediumText("Hide Header", color = MaterialTheme.colorScheme.surface)
+                }
             }
         }
+    }
+}
+
+@Composable
+private fun HeaderContent() {
+    Box(
+        modifier = Modifier
+            .height(100.dp)
+            .fillMaxWidth(),
+    ) {
+        BodyMediumText(
+            "Header",
+            modifier = Modifier.align(Alignment.Center),
+        )
     }
 }

@@ -23,6 +23,8 @@ class AuthenticationRepositoryImpl(
     }.mapLeft { CredentialsNotReceived(it.message.orEmpty()) }
 
     override suspend fun getCurrentUser(): Either<AuthError, GfUser> = Either.catch {
+        val token = firebaseAuth.currentUser?.getIdToken(true)?.await()?.token // Ovdje treba napravit spremanje tokena
+        println("USER_TOKEN: $token")
         firebaseAuth.currentUser.toDomainOrThrow()
     }.mapLeft { UserNotFound }
 
