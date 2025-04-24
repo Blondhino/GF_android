@@ -26,6 +26,13 @@ val gfFont = FontFamily(
     Font(resId = R.font.montserrat_medium, weight = Medium),
 )
 
+val BodyExtraSmallTextStyle = TextStyle(
+    fontFamily = gfFont,
+    fontSize = 10.sp,
+    lineHeight = 12.sp,
+    fontWeight = Normal,
+)
+
 val BodySmallTextStyle = TextStyle(
     fontFamily = gfFont,
     fontSize = 14.sp,
@@ -53,6 +60,30 @@ val TitleLargeTextStyle = TextStyle(
     lineHeight = 24.sp,
     fontWeight = SemiBold,
 )
+
+@Composable
+fun BodyExtraSmallText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = BodyExtraSmallTextStyle.lineHeight,
+    fontWeight: FontWeight? = BodyExtraSmallTextStyle.fontWeight,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = color,
+        fontWeight = fontWeight,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        style = BodyExtraSmallTextStyle,
+        maxLines = maxLines,
+        overflow = overflow,
+    )
+}
 
 @Composable
 fun BodySmallText(
