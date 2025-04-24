@@ -12,11 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.auth.domain.usecase.Logout
 import com.gadgetfactory.app.auth.ui.AuthScreen
+import com.gadgetfactory.app.gadgetcenter.component.GadgetCenterHeaderContent
+import com.gadgetfactory.app.ui.components.BackgroundColorMode
 import com.gadgetfactory.app.ui.components.BodyMediumText
+import com.gadgetfactory.app.ui.global.GlobalUi
+import com.gadgetfactory.app.ui.global.GlobalUiEvent.HideHeader
+import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
+import com.gadgetfactory.app.ui.global.GlobalUiEvent.ShowHeader
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 
@@ -26,6 +33,8 @@ class GadgetCenterScreen : Screen {
         val logout: Logout = koinInject()
         val scope = rememberCoroutineScope()
         val navigator = LocalNavigator.currentOrThrow
+        val globalUi: GlobalUi = koinInject()
+        val viewModel: GadgetCenterViewModel = koinScreenModel()
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier.align(Alignment.Center),
@@ -42,6 +51,42 @@ class GadgetCenterScreen : Screen {
                     },
                 ) {
                     BodyMediumText("Logout", color = MaterialTheme.colorScheme.surface)
+                }
+
+                Button(
+                    onClick = {
+                        globalUi.tryEmitUiEvent(
+                            ShowHeader {
+                                GadgetCenterHeaderContent(data = viewModel.getHeaderData())
+                            },
+                        )
+                    },
+                ) {
+                    BodyMediumText("Show Header", color = MaterialTheme.colorScheme.surface)
+                }
+
+                Button(
+                    onClick = { globalUi.tryEmitUiEvent(HideHeader) },
+                ) {
+                    BodyMediumText("Hide Header", color = MaterialTheme.colorScheme.surface)
+                }
+
+                Button(
+                    onClick = { globalUi.tryEmitUiEvent(SetBackgroundColorMode(BackgroundColorMode.Error)) },
+                ) {
+                    BodyMediumText("Set Error", color = MaterialTheme.colorScheme.surface)
+                }
+
+                Button(
+                    onClick = { globalUi.tryEmitUiEvent(SetBackgroundColorMode(BackgroundColorMode.Warning)) },
+                ) {
+                    BodyMediumText("Set Warning", color = MaterialTheme.colorScheme.surface)
+                }
+
+                Button(
+                    onClick = { globalUi.tryEmitUiEvent(SetBackgroundColorMode(BackgroundColorMode.Normal)) },
+                ) {
+                    BodyMediumText("Set Normal", color = MaterialTheme.colorScheme.surface)
                 }
             }
         }
