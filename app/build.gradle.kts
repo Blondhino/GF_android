@@ -94,6 +94,7 @@ dependencies {
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.bundles.arrow)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.bundles.ktor)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

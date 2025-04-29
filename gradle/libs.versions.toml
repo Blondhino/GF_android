@@ -22,6 +22,7 @@ androidGoogleId = "1.1.1"
 androidCredentials = "1.3.0"
 arrow = "1.2.4"
 kotlinxSerialization = "1.6.2"
+ktor = "2.3.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -60,6 +61,12 @@ androidx-credentials-play-services-auth = { module = "androidx.credentials:crede
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-coroutines = { group = "io.arrow-kt", name = "arrow-fx-coroutines", version.ref = "arrow" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+ktor-serialization-kotlinx-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-client-serialization = { group = "io.ktor", name = "ktor-client-serialization", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -76,12 +83,21 @@ voyager = [
     "voyager-navigator",
     "voyager-tab-navigator",
     "voyager-screenmodel",
-    "voyager-botom-sheet-navigator"
+    "voyager-botom-sheet-navigator",
 ]
 
 arrow = [
     "arrow-core",
     "arrow-coroutines"
+]
+
+ktor = [
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-client-serialization",
+    "ktor-client-okhttp",
+    "ktor-serialization-kotlinx-json",
+    "ktor-client-content-negotiation",
 ]
 
 koin-app = ["koin-core", "koin-android", "koin-compose"]
