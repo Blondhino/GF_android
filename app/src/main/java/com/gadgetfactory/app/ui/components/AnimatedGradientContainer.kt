@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,6 +23,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlin.math.hypot
@@ -33,6 +35,7 @@ fun AnimatedGradientContainer(
     secondColor: Int,
     paddingValues: PaddingValues,
     content: @Composable () -> Unit,
+    offsetFromTheTop: Dp,
     modifier: Modifier = Modifier,
 ) {
     var screenWidth by rememberSaveable { mutableIntStateOf(0) }
@@ -97,7 +100,13 @@ fun AnimatedGradientContainer(
             }
             .padding(paddingValues),
     ) {
-        content()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = offsetFromTheTop.plus(24.dp)),
+        ) {
+            content()
+        }
     }
 }
 

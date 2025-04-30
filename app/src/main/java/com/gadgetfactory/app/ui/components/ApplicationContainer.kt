@@ -21,6 +21,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.ui.components.BackgroundColorMode.Normal
 import com.gadgetfactory.app.ui.global.GlobalUi
 import com.gadgetfactory.app.ui.global.GlobalUiEvent.HideHeader
@@ -41,6 +42,7 @@ fun ApplicationContainer(
     var secondColor by rememberSaveable { mutableIntStateOf(Normal.colors.last().toArgb()) }
     val isContainerVisible = rememberSaveable { mutableStateOf(false) }
     val headerContent: MutableState<@Composable () -> Unit> = remember { mutableStateOf({}) }
+    var headerOffset by remember { mutableStateOf(0.dp) }
     LaunchedEffect(Unit) {
         globalUi.globalUiEvent.onEach {
             when (it) {
@@ -69,6 +71,7 @@ fun ApplicationContainer(
                 firstColor = firstColor,
                 secondColor = secondColor,
                 paddingValues = paddingValues,
+                offsetFromTheTop = headerOffset,
             )
             AnimatedVisibility(
                 visible = isContainerVisible.value,
@@ -78,6 +81,7 @@ fun ApplicationContainer(
                 HeaderContainer(
                     content = headerContent.value,
                     paddingValues = paddingValues,
+                    onOffsetChanged = { headerOffset = it },
                 )
             }
         }
