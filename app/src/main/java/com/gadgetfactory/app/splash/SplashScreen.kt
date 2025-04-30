@@ -8,7 +8,7 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.auth.ui.AuthScreen
-import com.gadgetfactory.app.gadgetcenter.GadgetCenterScreen
+import com.gadgetfactory.app.gadgetcenter.ui.GadgetCenterScreen
 
 class SplashScreen : Screen {
     @Composable

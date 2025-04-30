@@ -5,6 +5,7 @@ import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.resources.Resources
 import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
@@ -19,6 +20,7 @@ fun <T : HttpClientEngineConfig> HttpClientConfig<T>.getClientConfig(
         url(baseUrl)
     }
     install(HttpTimeout) { requestTimeoutMillis = TIMEOUT_MS }
+    install(Resources)
     install(ContentNegotiation) {
         json(
             Json {
@@ -29,6 +31,6 @@ fun <T : HttpClientEngineConfig> HttpClientConfig<T>.getClientConfig(
         )
     }
 }
-private const val API_VERSION = "v1"
-private const val BACKEND_BASE_URL = "https://api.factory-gadget.com/$API_VERSION"
+
+private const val BACKEND_BASE_URL = "https://api.factory-gadget.com"
 private const val TIMEOUT_MS = 60_000L
