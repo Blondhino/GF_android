@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.gadgetcenter.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,12 +15,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.gadgetfactory.app.gadgetcenter.model.ui.HeaderOption
 import com.gadgetfactory.app.ui.theme.SilverMist
 
 @Composable
 fun IconRoundedUiComponent(
-    data: IconRoundedUiComponentData,
-    onClick: (id: String) -> Unit,
+    data: HeaderOption,
+    onClick: (HeaderOption) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -28,11 +29,11 @@ fun IconRoundedUiComponent(
             .clip(CircleShape)
             .background(SilverMist)
             .border(1.dp, MaterialTheme.colorScheme.onSurface, CircleShape)
-            .clickable { onClick(data.id) },
+            .clickable { onClick(data) },
     ) {
         androidx.compose.foundation.Image(
             painterResource(data.icon),
-            contentDescription = data.id,
+            contentDescription = data.toString(),
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .align(Alignment.Center)
@@ -42,8 +43,3 @@ fun IconRoundedUiComponent(
         )
     }
 }
-
-data class IconRoundedUiComponentData(
-    val icon: Int,
-    val id: String,
-)

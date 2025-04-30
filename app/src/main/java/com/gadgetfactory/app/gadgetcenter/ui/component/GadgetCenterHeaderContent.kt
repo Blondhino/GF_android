@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.gadgetcenter.component
+package com.gadgetfactory.app.gadgetcenter.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,19 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.gadgetfactory.app.gadgetcenter.model.RoomUiComponentData
-import com.gadgetfactory.app.ui.components.IconRoundedUiComponent
-import com.gadgetfactory.app.ui.components.IconRoundedUiComponentData
+import com.gadgetfactory.app.gadgetcenter.model.ui.GadgetCenterHeaderUiState
+import com.gadgetfactory.app.gadgetcenter.model.ui.HeaderOption
 import com.gadgetfactory.app.ui.components.ProfileInfoUiComponent
-import com.gadgetfactory.app.ui.components.ProfileInfoUiComponentData
 import com.gadgetfactory.app.ui.components.TextPill
 
 @Composable
 fun GadgetCenterHeaderContent(
-    data: GadgetCenterHeaderContentData,
+    uiState: GadgetCenterHeaderUiState.Content,
     modifier: Modifier = Modifier,
     onRoomClicked: (roomId: String) -> Unit = {},
-    onOptionClicked: (optionId: String) -> Unit = {},
+    onOptionClicked: (HeaderOption) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -30,17 +28,17 @@ fun GadgetCenterHeaderContent(
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
-            ProfileInfoUiComponent(data.profileInfo, modifier = Modifier.fillMaxWidth(0.6f))
+            ProfileInfoUiComponent(uiState.profileInfo, modifier = Modifier.fillMaxWidth(0.6f))
 
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
                 IconRoundedUiComponent(
-                    data = data.addNewRoomOption,
-                    onClick = { onOptionClicked(data.addNewRoomOption.id) },
+                    data = uiState.addNewDevice,
+                    onClick = { onOptionClicked(uiState.addNewDevice) },
                 )
 
                 IconRoundedUiComponent(
-                    data = data.notificationsOption,
-                    onClick = { onOptionClicked(data.notificationsOption.id) },
+                    data = uiState.notificationsOption,
+                    onClick = { onOptionClicked(uiState.notificationsOption) },
 
                 )
             }
@@ -55,7 +53,7 @@ fun GadgetCenterHeaderContent(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth(0.85f),
             ) {
-                data.availableRooms.forEach { room ->
+                uiState.availableRooms.forEach { room ->
                     TextPill(
                         text = room.roomName,
                         id = room.roomId,
@@ -66,17 +64,9 @@ fun GadgetCenterHeaderContent(
             }
 
             IconRoundedUiComponent(
-                data = data.editRoomsOption,
-                onClick = { onOptionClicked(data.editRoomsOption.id) },
+                data = uiState.editRoomsOption,
+                onClick = { onOptionClicked(uiState.editRoomsOption) },
             )
         }
     }
 }
-
-data class GadgetCenterHeaderContentData(
-    val profileInfo: ProfileInfoUiComponentData,
-    val availableRooms: List<RoomUiComponentData>,
-    val addNewRoomOption: IconRoundedUiComponentData,
-    val notificationsOption: IconRoundedUiComponentData,
-    val editRoomsOption: IconRoundedUiComponentData,
-)

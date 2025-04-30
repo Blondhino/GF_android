@@ -35,7 +35,7 @@ import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.AuthProviderSel
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.GoogleAuthTokenReceived
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.GoogleTokenFetchFailed
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.SnackDismissed
-import com.gadgetfactory.app.gadgetcenter.GadgetCenterScreen
+import com.gadgetfactory.app.gadgetcenter.ui.GadgetCenterScreen
 import com.gadgetfactory.app.ui.components.BodyLargeText
 import com.gadgetfactory.app.ui.components.BodySmallText
 import com.gadgetfactory.app.ui.components.Image

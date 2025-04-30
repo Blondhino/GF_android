@@ -48,7 +48,7 @@ android {
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -95,6 +95,7 @@ dependencies {
     implementation(libs.bundles.arrow)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.bundles.ktor)
+    implementation(libs.coil.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

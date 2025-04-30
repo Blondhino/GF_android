@@ -3,7 +3,6 @@ package com.gadgetfactory.app.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -14,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.gadgetfactory.app.gadgetcenter.model.ui.ProfileInfoUiComponentData
 
 @Composable
 fun ProfileInfoUiComponent(
@@ -25,8 +26,10 @@ fun ProfileInfoUiComponent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Box(
-            Modifier
+        AsyncImage(
+            model = profileInfo.profileImageUrl,
+            contentDescription = profileInfo.profileTitle,
+            modifier = Modifier
                 .size(26.dp)
                 .border(1.dp, MaterialTheme.colorScheme.onSurface, CircleShape)
                 .clip(CircleShape)
@@ -37,8 +40,3 @@ fun ProfileInfoUiComponent(
         )
     }
 }
-
-data class ProfileInfoUiComponentData(
-    val profileImageUrl: String,
-    val profileTitle: String,
-)
