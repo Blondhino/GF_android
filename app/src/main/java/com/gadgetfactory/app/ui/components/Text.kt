@@ -19,42 +19,42 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.gadgetfactory.app.R
 
-val gfFont = FontFamily(
+private val gfFont = FontFamily(
     Font(resId = R.font.montserrat_regular, weight = Normal),
     Font(resId = R.font.montserrat_semibold, weight = SemiBold),
     Font(resId = R.font.montserrat_bold, weight = Bold),
     Font(resId = R.font.montserrat_medium, weight = Medium),
 )
 
-val BodyExtraSmallTextStyle = TextStyle(
+private val BodyExtraSmallTextStyle = TextStyle(
     fontFamily = gfFont,
     fontSize = 10.sp,
     lineHeight = 12.sp,
     fontWeight = Normal,
 )
 
-val BodySmallTextStyle = TextStyle(
+private val BodySmallTextStyle = TextStyle(
     fontFamily = gfFont,
     fontSize = 14.sp,
     lineHeight = 16.sp,
     fontWeight = Normal,
 )
 
-val BodyMediumTextStyle = TextStyle(
+private val BodyMediumTextStyle = TextStyle(
     fontFamily = gfFont,
     fontSize = 16.sp,
     lineHeight = 18.sp,
     fontWeight = Normal,
 )
 
-val BodyLargeTextStyle = TextStyle(
+private val BodyLargeTextStyle = TextStyle(
     fontFamily = gfFont,
     fontSize = 18.sp,
     lineHeight = 20.sp,
     fontWeight = Normal,
 )
 
-val TitleLargeTextStyle = TextStyle(
+private val TitleLargeTextStyle = TextStyle(
     fontFamily = gfFont,
     fontSize = 22.sp,
     lineHeight = 24.sp,
