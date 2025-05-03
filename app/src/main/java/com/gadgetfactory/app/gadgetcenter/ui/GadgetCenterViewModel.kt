@@ -18,7 +18,9 @@ import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterScreenEvent
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.HideHeader
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToAuthScreen
+import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToRegisterDeviceScreen
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.combine
@@ -65,8 +67,11 @@ class GadgetCenterViewModel(
 
     private fun handleOptionClicked(option: HeaderOption) = screenModelScope.launch {
         when (option) {
-            is AddDevice -> {}
-
+            is AddDevice -> {
+                _viewEffect.send(HideHeader)
+                delay(150)
+                _viewEffect.send(NavigateToRegisterDeviceScreen)
+            }
             is EditRooms -> {
                 logout()
                 _viewEffect.send(HideHeader)
