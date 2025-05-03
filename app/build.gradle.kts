@@ -78,6 +78,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation (libs.lottie.compose)
     implementation(libs.slf4j.nop)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

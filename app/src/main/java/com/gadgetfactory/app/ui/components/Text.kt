@@ -35,8 +35,8 @@ private val BodyExtraSmallTextStyle = TextStyle(
 
 private val BodySmallTextStyle = TextStyle(
     fontFamily = gfFont,
-    fontSize = 14.sp,
-    lineHeight = 16.sp,
+    fontSize = 12.sp,
+    lineHeight = 14.sp,
     fontWeight = Normal,
 )
 
