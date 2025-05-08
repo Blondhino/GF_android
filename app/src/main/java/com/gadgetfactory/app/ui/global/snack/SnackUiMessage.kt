@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight.Companion.Normal
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.ui.components.BodyLargeText
@@ -51,6 +52,7 @@ fun SnackUiMessage(
     modifier: Modifier = Modifier,
     cancelable: Boolean = true,
     onCancel: () -> Unit = {},
+    onAction: () -> Unit = {},
 ) {
     val handleColor = when (payload.type) {
         ErrorSnackbar -> Carmine
@@ -81,16 +83,7 @@ fun SnackUiMessage(
             .padding(16.dp),
         horizontalAlignment = Alignment.End,
     ) {
-        if (cancelable) {
-            Image(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .clickable(onClick = onCancel)
-                    .padding(16.dp)
-                    .size(24.dp),
-                imageType = ImageType.Resource(R.drawable.ic_close),
-            )
-        }
+        if (cancelable) CloseImage(onClose = onCancel)
 
         Row(
             modifier = Modifier
@@ -121,7 +114,52 @@ fun SnackUiMessage(
             ) {
                 BodyLargeText(text = payload.title, color = Frost, fontWeight = SemiBold)
                 BodyMediumText(text = payload.message, color = Frost, fontWeight = Normal)
+                payload.actionTitle?.let {
+                    ActionText(
+                        onAction = onAction,
+                        text = it,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+fun CloseImage(
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Image(
+        modifier = modifier
+            .clip(CircleShape)
+            .clickable(onClick = onClose)
+            .padding(vertical = 16.dp, horizontal = 8.dp)
+            .size(24.dp),
+        imageType = ImageType.Resource(R.drawable.ic_close),
+    )
+}
+
+@Composable
+fun ActionText(
+    onAction: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier = modifier) {
+        BodyMediumText(
+            modifier = Modifier
+                .clip(RoundedCornerShape(25))
+                .clickable { onAction() }
+                .align(Alignment.CenterEnd)
+                .padding(8.dp),
+            textAlign = TextAlign.End,
+            text = text,
+            color = Frost,
+            fontWeight = SemiBold,
+        )
     }
 }

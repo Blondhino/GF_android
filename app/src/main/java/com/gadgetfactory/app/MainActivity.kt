@@ -41,6 +41,7 @@ fun App(modifier: Modifier = Modifier) {
                     payload = message.toPayload(),
                     duration = message.visuals.duration,
                     onCancel = { snackbarHostState.currentSnackbarData?.dismiss() },
+                    onAction = { snackbarHostState.currentSnackbarData?.performAction() },
                 )
             }
         },
