@@ -6,4 +6,16 @@
     <string name="general_something_went_wrong_message">We are unable to process your request. Please try again later</string>
     <string name="auth_screen_welcome_message">Welcome to</string>
     <string name="general_app_name">Gadget Factory</string>
+    <string name="register_device_screen_button_scan">Start Scanning</string>
+    <string name="register_device_screen_button_scan_again">Scan Again</string>
+    <string name="register_device_screen_message">Looking for compatible devices…</string>
+    <string name="register_device_screen_devices_not_found">Didn\'t find your gadget ? </string>
+    <string name="bluetooth_permission_error_message">Bluetooth permissions are required to scan for devices.</string>
+    <string name="bluetooth_permission_error_title">Bluetooth permission denied</string>
+    <string name="bluetooth_permission_error_action_text">Open settings</string>
+    <string name="bluetooth_permission_warning_message">Bluetooth is required to scan nearby devices. Please enable it in app settings.</string>
+    <string name="bluetooth_permission_warning_title">Permission required</string>
+    <string name="bluetooth_adapter_error_message">Please enable Bluetooth before scanning</string>
+    <string name="bluetooth_adapter_error_title">Turn on Bluetooth</string>
+
 </resources>

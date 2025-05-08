@@ -23,7 +23,7 @@ fun ObserveSnackMessages(
                 )
             ) {
                 Dismissed -> snack.onDismiss.invoke()
-                ActionPerformed -> snack.action?.action?.invoke()
+                ActionPerformed -> snack.action.invoke()
             }
         }
     }

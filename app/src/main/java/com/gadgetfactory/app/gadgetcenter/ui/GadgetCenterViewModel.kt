@@ -3,6 +3,7 @@ package com.gadgetfactory.app.gadgetcenter.ui
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.gadgetfactory.app.auth.domain.usecase.Logout
+import com.gadgetfactory.app.core.OnetimeWhileSubscribed
 import com.gadgetfactory.app.gadgetcenter.data.mapper.GadgetCenterHeaderMapper
 import com.gadgetfactory.app.gadgetcenter.data.mapper.GadgetCenterUiMapper
 import com.gadgetfactory.app.gadgetcenter.domain.GetGadgetCenterHeader
@@ -20,9 +21,7 @@ import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToAuthScreen
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToRegisterDeviceScreen
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -53,7 +52,7 @@ class GadgetCenterViewModel(
         uiMapper::map,
     ).stateIn(
         scope = screenModelScope,
-        started = WhileSubscribed(5_000L),
+        started = OnetimeWhileSubscribed(5_000L),
         initialValue = GadgetCenterScreenState.Loading,
     )
 
@@ -69,9 +68,9 @@ class GadgetCenterViewModel(
         when (option) {
             is AddDevice -> {
                 _viewEffect.send(HideHeader)
-                delay(150)
                 _viewEffect.send(NavigateToRegisterDeviceScreen)
             }
+
             is EditRooms -> {
                 logout()
                 _viewEffect.send(HideHeader)
