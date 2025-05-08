@@ -1,6 +1,6 @@
 package com.gadgetfactory.app.core
 
-import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
@@ -13,7 +13,7 @@ fun Map<String, @JvmSuppressWildcards Boolean>.checkPermissionsResults(
     context: Context,
     onResult: (BluetoothPermissions) -> Unit,
 ) {
-    if (!isBluetoothEnabled()) {
+    if (!isBluetoothEnabled(context)) {
         onResult(BluetoothPermissions.AdapterTurnedOff)
         return
     }
@@ -36,9 +36,9 @@ fun Map<String, @JvmSuppressWildcards Boolean>.checkPermissionsResults(
     }
 }
 
-private fun isBluetoothEnabled(): Boolean {
-    val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    return bluetoothAdapter?.isEnabled == true
+private fun isBluetoothEnabled(context: Context): Boolean {
+    val bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    return bluetoothManager.adapter?.isEnabled == true
 }
 
 sealed interface BluetoothPermissions {
