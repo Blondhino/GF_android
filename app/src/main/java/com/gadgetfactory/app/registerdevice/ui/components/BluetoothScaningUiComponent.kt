@@ -1,13 +1,8 @@
 package com.gadgetfactory.app.registerdevice.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -34,12 +28,10 @@ import com.airbnb.lottie.compose.LottieConstants.IterateForever
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gadgetfactory.app.R
-import com.gadgetfactory.app.ui.components.BodySmallText
 import com.gadgetfactory.app.ui.theme.LightIndigo
 
 @Composable
 fun BluetoothScanningUiComponent(
-    message: String,
     isScanning: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -78,22 +70,7 @@ fun BluetoothScanningUiComponent(
                     .padding(16.dp),
 
                 painter = painterResource(R.drawable.ic_bluetooth),
-                contentDescription = message,
-            )
-        }
-
-        AnimatedVisibility(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(32.dp),
-            visible = isScanning,
-            enter = fadeIn() + slideInVertically(),
-            exit = fadeOut() + slideOutVertically(),
-        ) {
-            BodySmallText(
-                text = message,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
+                contentDescription = null,
             )
         }
     }

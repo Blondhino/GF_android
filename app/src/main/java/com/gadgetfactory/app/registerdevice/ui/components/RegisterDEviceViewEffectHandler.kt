@@ -5,7 +5,7 @@ import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.gadgetfactory.app.core.bluetooth.getRequiredBluetoothPermissions
-import com.gadgetfactory.app.core.rememberBluetoothPermissionLauncher
+import com.gadgetfactory.app.core.bluetooth.rememberBluetoothPermissionLauncher
 import com.gadgetfactory.app.registerdevice.ui.RegisterDeviceViewModel
 import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent
 import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.AdapterWarningDismissed

@@ -1,13 +1,14 @@
-package com.gadgetfactory.app.core
+package com.gadgetfactory.app.core.bluetooth
 
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat.checkSelfPermission
-import com.gadgetfactory.app.core.BluetoothPermissions.AllGranted
-import com.gadgetfactory.app.core.BluetoothPermissions.AnyPermanentlyDenied
-import com.gadgetfactory.app.core.BluetoothPermissions.SomeDenied
+import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.AllGranted
+import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.AnyPermanentlyDenied
+import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.SomeDenied
+import com.gadgetfactory.app.core.findActivity
 
 fun Map<String, @JvmSuppressWildcards Boolean>.checkPermissionsResults(
     context: Context,

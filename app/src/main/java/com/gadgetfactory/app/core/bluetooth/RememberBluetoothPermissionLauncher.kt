@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.core
+package com.gadgetfactory.app.core.bluetooth
 
 import android.content.Context
 import androidx.activity.compose.rememberLauncherForActivityResult
