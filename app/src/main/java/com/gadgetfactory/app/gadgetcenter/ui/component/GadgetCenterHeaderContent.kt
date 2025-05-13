@@ -9,10 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.gadgetfactory.app.core.ui.components.ProfileInfoUiComponent
+import com.gadgetfactory.app.core.ui.components.TextPill
 import com.gadgetfactory.app.gadgetcenter.model.ui.GadgetCenterHeaderUiState
 import com.gadgetfactory.app.gadgetcenter.model.ui.HeaderOption
-import com.gadgetfactory.app.ui.components.ProfileInfoUiComponent
-import com.gadgetfactory.app.ui.components.TextPill
 
 @Composable
 fun GadgetCenterHeaderContent(

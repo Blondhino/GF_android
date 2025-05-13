@@ -28,7 +28,7 @@ import com.airbnb.lottie.compose.LottieConstants.IterateForever
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.gadgetfactory.app.R
-import com.gadgetfactory.app.ui.theme.LightIndigo
+import com.gadgetfactory.app.core.ui.theme.LightIndigo
 
 @Composable
 fun BluetoothScanningUiComponent(

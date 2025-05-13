@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.theme
+package com.gadgetfactory.app.core.ui.theme
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.gadgetfactory.app.ui.components.ApplicationContainer
+import com.gadgetfactory.app.core.ui.components.ApplicationContainer
 
 private val DarkColorScheme = darkColorScheme(
     surface = Onyx,

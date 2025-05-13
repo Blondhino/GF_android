@@ -1,11 +1,11 @@
-package com.gadgetfactory.app.ui.global.snack
+package com.gadgetfactory.app.core.ui.global.snack
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult.ActionPerformed
 import androidx.compose.material3.SnackbarResult.Dismissed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import com.gadgetfactory.app.ui.global.ObserveAsEvents
+import com.gadgetfactory.app.core.ui.global.ObserveAsEvents
 import kotlinx.coroutines.launch
 
 @Composable

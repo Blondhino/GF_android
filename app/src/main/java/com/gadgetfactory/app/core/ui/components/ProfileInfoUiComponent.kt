@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

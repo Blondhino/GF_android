@@ -19,7 +19,7 @@ import com.gadgetfactory.app.core.bluetooth.getRequiredBluetoothPermissions
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.AdapterError
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.PermissionDenied
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.ScannerError
-import com.gadgetfactory.app.ui.components.ImageType
+import com.gadgetfactory.app.core.ui.components.ImageType
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

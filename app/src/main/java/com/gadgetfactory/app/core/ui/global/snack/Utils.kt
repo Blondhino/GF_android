@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.global.snack
+package com.gadgetfactory.app.core.ui.global.snack
 
 import androidx.compose.material3.SnackbarData
 import kotlinx.serialization.encodeToString

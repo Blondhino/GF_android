@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.global.snack
+package com.gadgetfactory.app.core.ui.global.snack
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

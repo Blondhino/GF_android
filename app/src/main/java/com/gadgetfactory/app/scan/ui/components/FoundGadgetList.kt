@@ -23,11 +23,11 @@ import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
+import com.gadgetfactory.app.core.ui.components.BodySmallText
+import com.gadgetfactory.app.core.ui.components.SheetHandle
+import com.gadgetfactory.app.core.ui.theme.SilverMist
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.ScanAgainClick
-import com.gadgetfactory.app.ui.components.BodySmallText
-import com.gadgetfactory.app.ui.components.SheetHandle
-import com.gadgetfactory.app.ui.theme.SilverMist
 
 @Composable
 fun FoundGadgetsList(

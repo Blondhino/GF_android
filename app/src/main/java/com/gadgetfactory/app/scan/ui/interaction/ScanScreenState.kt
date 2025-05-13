@@ -1,7 +1,7 @@
 package com.gadgetfactory.app.scan.ui.interaction
 
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
-import com.gadgetfactory.app.ui.global.snack.SnackbarPayload
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarPayload
 
 data class ScanScreenState(
     val isScanning: Boolean,

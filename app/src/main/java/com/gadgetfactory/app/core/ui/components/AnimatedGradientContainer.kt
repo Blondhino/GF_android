@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing

@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import coil.compose.AsyncImage
-import com.gadgetfactory.app.ui.components.ImageType.Remote
-import com.gadgetfactory.app.ui.components.ImageType.Resource
+import com.gadgetfactory.app.core.ui.components.ImageType.Remote
+import com.gadgetfactory.app.core.ui.components.ImageType.Resource
 
 @Composable
 fun Image(

@@ -13,6 +13,11 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.auth.ui.AuthScreen
+import com.gadgetfactory.app.core.ui.components.BodyMediumText
+import com.gadgetfactory.app.core.ui.components.RoundLoadingIndicator
+import com.gadgetfactory.app.core.ui.global.GlobalUi
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.HideHeader
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.ShowHeader
 import com.gadgetfactory.app.gadgetcenter.model.ui.GadgetCenterHeaderUiState
 import com.gadgetfactory.app.gadgetcenter.model.ui.GadgetCenterScreenState
 import com.gadgetfactory.app.gadgetcenter.model.ui.GadgetCenterScreenState.Content
@@ -24,11 +29,6 @@ import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToAuthScreen
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToRegisterDeviceScreen
 import com.gadgetfactory.app.scan.ui.ScanScreen
-import com.gadgetfactory.app.ui.components.BodyMediumText
-import com.gadgetfactory.app.ui.components.RoundLoadingIndicator
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.HideHeader
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.ShowHeader
 import org.koin.compose.koinInject
 
 class GadgetCenterScreen : Screen {

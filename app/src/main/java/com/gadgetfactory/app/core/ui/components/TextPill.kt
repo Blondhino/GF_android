@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
@@ -13,8 +13,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.gadgetfactory.app.ui.theme.LightIndigo
-import com.gadgetfactory.app.ui.theme.SilverMist
+import com.gadgetfactory.app.core.ui.theme.LightIndigo
+import com.gadgetfactory.app.core.ui.theme.SilverMist
 
 @Composable
 fun TextPill(

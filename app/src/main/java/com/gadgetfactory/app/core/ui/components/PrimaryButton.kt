@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.unit.dp
-import com.gadgetfactory.app.ui.theme.LightIndigo
-import com.gadgetfactory.app.ui.theme.SilverMist
+import com.gadgetfactory.app.core.ui.theme.LightIndigo
+import com.gadgetfactory.app.core.ui.theme.SilverMist
 
 @Composable
 fun PrimaryButton(

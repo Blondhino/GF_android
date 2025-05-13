@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

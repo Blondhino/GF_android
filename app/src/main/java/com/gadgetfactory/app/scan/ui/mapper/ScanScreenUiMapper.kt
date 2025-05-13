@@ -3,10 +3,10 @@ package com.gadgetfactory.app.scan.ui.mapper
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
 import com.gadgetfactory.app.core.dictionary.Dictionary
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarPayload
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.ErrorSnackbar
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.WarningSnackbar
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenState
-import com.gadgetfactory.app.ui.global.snack.SnackbarPayload
-import com.gadgetfactory.app.ui.global.snack.SnackbarType.ErrorSnackbar
-import com.gadgetfactory.app.ui.global.snack.SnackbarType.WarningSnackbar
 
 class ScanScreenUiMapper(
     private val dictionary: Dictionary,

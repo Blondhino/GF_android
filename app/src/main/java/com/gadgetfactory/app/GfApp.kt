@@ -1,7 +1,7 @@
 package com.gadgetfactory.app
 
 import android.app.Application
-import com.gadgetfactory.app.di.appModule
+import com.gadgetfactory.app.core.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

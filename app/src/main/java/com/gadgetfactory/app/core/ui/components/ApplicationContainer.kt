@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -22,11 +22,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Normal
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.HideHeader
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.ShowHeader
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Normal
+import com.gadgetfactory.app.core.ui.global.GlobalUi
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.HideHeader
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.ShowHeader
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.compose.koinInject
@@ -46,7 +46,7 @@ fun ApplicationContainer(
     LaunchedEffect(Unit) {
         globalUi.globalUiEvent.onEach {
             when (it) {
-                is SetBackgroundColorMode -> {
+                is GlobalUiEvent.SetBackgroundColorMode -> {
                     firstColor = it.colorMode.colors.first().toArgb()
                     secondColor = it.colorMode.colors.last().toArgb()
                 }

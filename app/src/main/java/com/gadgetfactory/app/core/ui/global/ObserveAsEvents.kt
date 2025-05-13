@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.global
+package com.gadgetfactory.app.core.ui.global
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

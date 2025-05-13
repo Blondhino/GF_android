@@ -6,6 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import com.gadgetfactory.app.core.bluetooth.getRequiredBluetoothPermissions
 import com.gadgetfactory.app.core.bluetooth.rememberBluetoothPermissionLauncher
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Error
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Normal
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Warning
+import com.gadgetfactory.app.core.ui.global.GlobalUi
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.SetBackgroundColorMode
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarController
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarMessage
 import com.gadgetfactory.app.scan.ui.ScanViewModel
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.AdapterWarningDismissed
@@ -17,13 +24,6 @@ import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.OpenAppSet
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothAdapterWarning
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionError
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionWarning
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Error
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Normal
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Warning
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
-import com.gadgetfactory.app.ui.global.snack.SnackbarController
-import com.gadgetfactory.app.ui.global.snack.SnackbarMessage
 import openAppSettings
 
 @Composable

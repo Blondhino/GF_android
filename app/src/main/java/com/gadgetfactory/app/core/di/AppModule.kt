@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.di
+package com.gadgetfactory.app.core.di
 
 import com.gadgetfactory.app.auth.di.authModule
 import com.gadgetfactory.app.core.coreModule

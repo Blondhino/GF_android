@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import com.gadgetfactory.app.core.ui.global.GlobalUi
 import com.gadgetfactory.app.scan.ui.components.ScanScreenContent
 import com.gadgetfactory.app.scan.ui.components.ScanViewEffectHandler
-import com.gadgetfactory.app.ui.global.GlobalUi
 import org.koin.compose.koinInject
 
 class ScanScreen : Screen {

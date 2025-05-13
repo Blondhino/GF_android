@@ -1,7 +1,7 @@
 package com.gadgetfactory.app.core.bluetooth.scanner
 
 import arrow.core.Either
-import com.gadgetfactory.app.ui.components.ImageType
+import com.gadgetfactory.app.core.ui.components.ImageType
 import kotlinx.coroutines.flow.Flow
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds

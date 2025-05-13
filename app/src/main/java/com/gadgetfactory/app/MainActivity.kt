@@ -12,11 +12,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import cafe.adriel.voyager.navigator.Navigator
+import com.gadgetfactory.app.core.ui.global.snack.ObserveSnackMessages
+import com.gadgetfactory.app.core.ui.global.snack.SnackUiMessage
+import com.gadgetfactory.app.core.ui.global.snack.toPayload
+import com.gadgetfactory.app.core.ui.theme.GadgetFactoryTheme
 import com.gadgetfactory.app.splash.SplashScreen
-import com.gadgetfactory.app.ui.global.snack.ObserveSnackMessages
-import com.gadgetfactory.app.ui.global.snack.SnackUiMessage
-import com.gadgetfactory.app.ui.global.snack.toPayload
-import com.gadgetfactory.app.ui.theme.GadgetFactoryTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

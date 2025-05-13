@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.components
+package com.gadgetfactory.app.core.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.gadgetfactory.app.ui.theme.SilverMist
+import com.gadgetfactory.app.core.ui.theme.SilverMist
 
 @Composable
 fun HeaderContainer(

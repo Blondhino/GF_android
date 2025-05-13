@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.theme
+package com.gadgetfactory.app.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

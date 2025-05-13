@@ -20,11 +20,11 @@ import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
-import com.gadgetfactory.app.ui.components.BodyExtraSmallText
-import com.gadgetfactory.app.ui.components.BodySmallText
-import com.gadgetfactory.app.ui.components.Image
-import com.gadgetfactory.app.ui.components.ImageType.Resource
-import com.gadgetfactory.app.ui.theme.SilverMist
+import com.gadgetfactory.app.core.ui.components.BodyExtraSmallText
+import com.gadgetfactory.app.core.ui.components.BodySmallText
+import com.gadgetfactory.app.core.ui.components.Image
+import com.gadgetfactory.app.core.ui.components.ImageType.Resource
+import com.gadgetfactory.app.core.ui.theme.SilverMist
 
 @Composable
 fun FoundGadgetUiItem(

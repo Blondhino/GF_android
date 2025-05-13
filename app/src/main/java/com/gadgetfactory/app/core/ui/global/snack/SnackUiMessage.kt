@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.ui.global.snack
+package com.gadgetfactory.app.core.ui.global.snack
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -31,19 +31,19 @@ import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
-import com.gadgetfactory.app.ui.components.BodyLargeText
-import com.gadgetfactory.app.ui.components.BodyMediumText
-import com.gadgetfactory.app.ui.components.Image
-import com.gadgetfactory.app.ui.components.ImageType
-import com.gadgetfactory.app.ui.global.snack.SnackbarType.ErrorSnackbar
-import com.gadgetfactory.app.ui.global.snack.SnackbarType.SuccessSnackbar
-import com.gadgetfactory.app.ui.global.snack.SnackbarType.WarningSnackbar
-import com.gadgetfactory.app.ui.theme.Amber
-import com.gadgetfactory.app.ui.theme.Carmine
-import com.gadgetfactory.app.ui.theme.Frost
-import com.gadgetfactory.app.ui.theme.Lime
-import com.gadgetfactory.app.ui.theme.Onyx
-import com.gadgetfactory.app.ui.theme.Steel
+import com.gadgetfactory.app.core.ui.components.BodyLargeText
+import com.gadgetfactory.app.core.ui.components.BodyMediumText
+import com.gadgetfactory.app.core.ui.components.Image
+import com.gadgetfactory.app.core.ui.components.ImageType
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.ErrorSnackbar
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.SuccessSnackbar
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.WarningSnackbar
+import com.gadgetfactory.app.core.ui.theme.Amber
+import com.gadgetfactory.app.core.ui.theme.Carmine
+import com.gadgetfactory.app.core.ui.theme.Frost
+import com.gadgetfactory.app.core.ui.theme.Lime
+import com.gadgetfactory.app.core.ui.theme.Onyx
+import com.gadgetfactory.app.core.ui.theme.Steel
 
 @Composable
 fun SnackUiMessage(

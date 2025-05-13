@@ -16,9 +16,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Normal
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Normal
+import com.gadgetfactory.app.core.ui.global.GlobalUi
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.SetBackgroundColorMode
 import org.koin.compose.koinInject
 
 class HomeScreen : Screen {

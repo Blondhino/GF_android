@@ -7,8 +7,8 @@ import com.gadgetfactory.app.core.dictionary.DictionaryImpl
 import com.gadgetfactory.app.core.dictionary.LocalStringResources
 import com.gadgetfactory.app.core.dictionary.StringResources
 import com.gadgetfactory.app.core.networking.buildHttpClient
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiImpl
+import com.gadgetfactory.app.core.ui.global.GlobalUi
+import com.gadgetfactory.app.core.ui.global.GlobalUiImpl
 import com.google.firebase.auth.FirebaseAuth
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpSend
