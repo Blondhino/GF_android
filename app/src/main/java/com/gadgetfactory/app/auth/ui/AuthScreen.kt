@@ -42,7 +42,7 @@ import com.gadgetfactory.app.core.ui.components.ImageType
 import com.gadgetfactory.app.core.ui.components.RoundLoadingIndicator
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarController
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarMessage
-import com.gadgetfactory.app.gadgetcenter.ui.GadgetCenterScreen
+import com.gadgetfactory.app.dashboard.ui.DashboardScreen
 import org.koin.compose.koinInject
 
 class AuthScreen : Screen {
@@ -66,7 +66,7 @@ class AuthScreen : Screen {
                         }.onLeft { viewModel.onEvent(GoogleTokenFetchFailed) }
                     }
 
-                    OpenGadgetCenter -> navigator.replace(GadgetCenterScreen())
+                    OpenGadgetCenter -> navigator.replace(DashboardScreen())
                     is ShowSnackMessage -> {
                         SnackbarController.pushSnackMessage(
                             message = SnackbarMessage(

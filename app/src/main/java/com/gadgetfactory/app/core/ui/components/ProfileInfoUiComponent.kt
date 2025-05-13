@@ -14,7 +14,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.gadgetfactory.app.gadgetcenter.model.ui.ProfileInfoUiComponentData
+import com.gadgetfactory.app.dashboard.model.ui.ProfileInfoUiComponentData
 
 @Composable
 fun ProfileInfoUiComponent(
