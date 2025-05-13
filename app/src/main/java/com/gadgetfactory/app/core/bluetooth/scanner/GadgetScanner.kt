@@ -12,6 +12,8 @@ interface GadgetScanner {
         onScanStarted: () -> Unit = {},
         onScanStopped: () -> Unit = {},
     ): Either<GadgetScannerError, Flow<List<FoundGadget>>>
+
+    fun stopScanning()
 }
 
 sealed interface GadgetScannerError {

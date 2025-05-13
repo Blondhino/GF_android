@@ -2,6 +2,7 @@ package com.gadgetfactory.app.scan.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,6 +30,7 @@ import com.gadgetfactory.app.core.ui.theme.SilverMist
 @Composable
 fun FoundGadgetUiItem(
     gadget: FoundGadget,
+    onGadgetClick: (gadget: FoundGadget) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -41,6 +43,7 @@ fun FoundGadgetUiItem(
                 shape = RoundedCornerShape(25),
             )
             .background(SilverMist)
+            .clickable { onGadgetClick(gadget) }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,

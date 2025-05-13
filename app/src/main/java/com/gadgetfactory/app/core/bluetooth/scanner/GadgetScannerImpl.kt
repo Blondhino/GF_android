@@ -31,6 +31,9 @@ class GadgetScannerImpl(
     private val context: Context,
 ) : GadgetScanner {
     private val bluetoothManager = context.getSystemService(BLUETOOTH_SERVICE) as BluetoothManager
+    private var currentScanner: BluetoothLeScanner? = null
+    private var currentCallback: ScanCallback? = null
+    private var onScanStoppedCallback: (() -> Unit) = {}
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun discoverGadgets(
@@ -40,6 +43,8 @@ class GadgetScannerImpl(
     ): Either<GadgetScannerError, Flow<List<FoundGadget>>> = either {
         checkPermission().bind()
         val scanner = getScanner().bind()
+        currentScanner = scanner
+        onScanStoppedCallback = onScanStopped
         val foundDevices = mutableMapOf<String, FoundGadget>()
         return callbackFlow {
             val scanCallback = object : ScanCallback() {
@@ -61,7 +66,7 @@ class GadgetScannerImpl(
                     trySend(foundDevices.values.toList())
                 }
             }
-
+            currentCallback = scanCallback
             scanner.startScan(scanCallback)
             onScanStarted()
             launch {
@@ -74,6 +79,14 @@ class GadgetScannerImpl(
                 onScanStopped()
             }
         }.right()
+    }
+
+    override fun stopScanning() {
+        currentScanner?.let { scanner ->
+            checkPermission()
+            scanner.stopScan(currentCallback)
+            onScanStoppedCallback()
+        }
     }
 
     private fun mapImage(deviceName: String): ImageType.Resource = when (deviceName) {

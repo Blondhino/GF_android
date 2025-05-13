@@ -12,12 +12,14 @@ import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScanner
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.AdapterWarningDismissed
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.OnCheckPermissionsResult
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.OnGadgetCLicked
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.OpenAppSettingsClicked
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.PermissionErrorDismissed
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.ScanAgainClick
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.StartScanClick
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.CheckBluetoothPermission
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.GoToConnectPage
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.OpenAppSettings
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothAdapterWarning
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionError
@@ -49,6 +51,11 @@ class ScanViewModel(
             is PermissionErrorDismissed -> _uiState.update { it.copy(isButtonVisible = true) }
             is OpenAppSettingsClicked -> handleAppSettingsClicked()
             is AdapterWarningDismissed -> _uiState.update { it.copy(isButtonVisible = true) }
+            is OnGadgetCLicked -> {
+                screenModelScope.launch { _viewEffect.send(GoToConnectPage(event.device)) }
+                gadgetScanner.stopScanning()
+            }
+
             is ScanAgainClick -> {
                 _uiState.update { it.copy(scanAgainButtonVisible = false) }
                 startWithScanning()

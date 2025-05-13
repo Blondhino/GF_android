@@ -27,6 +27,7 @@ import com.gadgetfactory.app.core.ui.components.BodySmallText
 import com.gadgetfactory.app.core.ui.components.SheetHandle
 import com.gadgetfactory.app.core.ui.theme.SilverMist
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.OnGadgetCLicked
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.ScanAgainClick
 
 @Composable
@@ -64,6 +65,7 @@ fun FoundGadgetsList(
                     FoundGadgetUiItem(
                         modifier = Modifier.animateItem(),
                         gadget = devices[index],
+                        onGadgetClick = { onEvent(OnGadgetCLicked(it)) },
                     )
                 }
             }
