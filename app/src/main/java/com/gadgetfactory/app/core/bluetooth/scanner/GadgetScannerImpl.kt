@@ -14,10 +14,12 @@ import arrow.core.Either
 import arrow.core.raise.either
 import arrow.core.raise.ensure
 import arrow.core.right
+import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.bluetooth.getRequiredBluetoothPermissions
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.AdapterError
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.PermissionDenied
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.ScannerError
+import com.gadgetfactory.app.ui.components.ImageType
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -47,12 +49,13 @@ class GadgetScannerImpl(
                 ) {
                     checkPermission().bind()
                     val device = result.device ?: return
-                    val name = device.name ?: ""
+                    val name = device.name.orEmpty()
 
-                    if (name.isNotEmpty()) {
+                    if (name.startsWith(GADGET_FACTORY_PREFIX)) {
                         foundDevices[device.address] = FoundGadget(
+                            name = name.substringAfter(GADGET_FACTORY_PREFIX),
                             address = device.address,
-                            name = name,
+                            image = mapImage(name.substringAfter(GADGET_FACTORY_PREFIX)),
                         )
                     }
                     trySend(foundDevices.values.toList())
@@ -73,6 +76,11 @@ class GadgetScannerImpl(
         }.right()
     }
 
+    private fun mapImage(deviceName: String): ImageType.Resource = when (deviceName) {
+        GADGET_LUMORA -> ImageType.Resource(R.drawable.ic_lumora)
+        else -> ImageType.Resource(R.drawable.ic_bluetooth)
+    }
+
     private fun checkPermission(): Either<GadgetScannerError, Unit> = either {
         getRequiredBluetoothPermissions().forEach {
             ensure(checkSelfPermission(context, it) == PERMISSION_GRANTED) { PermissionDenied }
@@ -88,3 +96,6 @@ class GadgetScannerImpl(
         scanner
     }
 }
+
+private const val GADGET_FACTORY_PREFIX = "GFactory-"
+private const val GADGET_LUMORA = "Lumora - Air Monitor"

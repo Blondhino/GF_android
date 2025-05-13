@@ -17,5 +17,7 @@
     <string name="bluetooth_permission_warning_title">Permission required</string>
     <string name="bluetooth_adapter_error_message">Please enable Bluetooth before scanning</string>
     <string name="bluetooth_adapter_error_title">Turn on Bluetooth</string>
+    <string name="device_not_found_question">Didn\'t find your device ?</string>
+    <string name="ready_to_connect">Ready to connect</string>
 
 </resources>

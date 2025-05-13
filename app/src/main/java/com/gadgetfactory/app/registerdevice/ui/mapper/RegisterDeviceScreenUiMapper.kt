@@ -16,7 +16,7 @@ class RegisterDeviceScreenUiMapper(
         devices: List<FoundGadget> = emptyList(),
     ) = RegisterDeviceScreenState(
         isScanning = isScanning,
-        isButtonVisible = !isScanning || devices.isNotEmpty(),
+        isButtonVisible = !isScanning && devices.isEmpty(),
         buttonText = dictionary.getString(R.string.register_device_screen_button_scan),
         devices = devices.filter { it.name.isNotEmpty() },
         shouldShowDevicesList = devices.isNotEmpty(),
