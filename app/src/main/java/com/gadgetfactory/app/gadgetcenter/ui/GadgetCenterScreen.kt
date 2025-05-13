@@ -23,7 +23,7 @@ import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterScreenEvent
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToAuthScreen
 import com.gadgetfactory.app.gadgetcenter.ui.interaction.GadgetCenterViewEffect.NavigateToRegisterDeviceScreen
-import com.gadgetfactory.app.registerdevice.ui.RegisterDeviceScreen
+import com.gadgetfactory.app.scan.ui.ScanScreen
 import com.gadgetfactory.app.ui.components.BodyMediumText
 import com.gadgetfactory.app.ui.components.RoundLoadingIndicator
 import com.gadgetfactory.app.ui.global.GlobalUi
@@ -44,7 +44,7 @@ class GadgetCenterScreen : Screen {
                 when (effect) {
                     GadgetCenterViewEffect.HideHeader -> globalUi.emitUiEvent(HideHeader)
                     NavigateToAuthScreen -> navigator.replaceAll(AuthScreen())
-                    NavigateToRegisterDeviceScreen -> navigator.push(RegisterDeviceScreen())
+                    NavigateToRegisterDeviceScreen -> navigator.push(ScanScreen())
                 }
             }
         }

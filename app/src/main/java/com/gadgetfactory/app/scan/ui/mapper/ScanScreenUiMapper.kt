@@ -1,20 +1,20 @@
-package com.gadgetfactory.app.registerdevice.ui.mapper
+package com.gadgetfactory.app.scan.ui.mapper
 
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
 import com.gadgetfactory.app.core.dictionary.Dictionary
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenState
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenState
 import com.gadgetfactory.app.ui.global.snack.SnackbarPayload
 import com.gadgetfactory.app.ui.global.snack.SnackbarType.ErrorSnackbar
 import com.gadgetfactory.app.ui.global.snack.SnackbarType.WarningSnackbar
 
-class RegisterDeviceScreenUiMapper(
+class ScanScreenUiMapper(
     private val dictionary: Dictionary,
 ) {
     fun map(
         isScanning: Boolean = false,
         devices: List<FoundGadget> = emptyList(),
-    ) = RegisterDeviceScreenState(
+    ) = ScanScreenState(
         isScanning = isScanning,
         isButtonVisible = !isScanning && devices.isEmpty(),
         buttonText = dictionary.getString(R.string.register_device_screen_button_scan),

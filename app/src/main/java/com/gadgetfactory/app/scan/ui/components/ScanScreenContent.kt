@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.registerdevice.ui.components
+package com.gadgetfactory.app.scan.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -16,16 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.StartScanClick
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenState
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.StartScanClick
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenState
 import com.gadgetfactory.app.ui.components.BodyMediumText
 import com.gadgetfactory.app.ui.components.PrimaryButton
 
 @Composable
-fun RegisterDeviceScreenContent(
-    uiState: RegisterDeviceScreenState,
-    onEvent: (event: RegisterDeviceScreenEvent) -> Unit,
+fun ScanScreenContent(
+    uiState: ScanScreenState,
+    onEvent: (event: ScanScreenEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) = Box(modifier) {
     Column {

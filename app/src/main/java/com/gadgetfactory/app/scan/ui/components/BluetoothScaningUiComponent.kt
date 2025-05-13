@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.registerdevice.ui.components
+package com.gadgetfactory.app.scan.ui.components
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState

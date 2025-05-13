@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.registerdevice.ui.components
+package com.gadgetfactory.app.scan.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -23,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.ScanAgainClick
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.ScanAgainClick
 import com.gadgetfactory.app.ui.components.BodySmallText
 import com.gadgetfactory.app.ui.components.SheetHandle
 import com.gadgetfactory.app.ui.theme.SilverMist
@@ -33,7 +33,7 @@ import com.gadgetfactory.app.ui.theme.SilverMist
 fun FoundGadgetsList(
     devices: List<FoundGadget>,
     scanAgainButtonVisible: Boolean,
-    onEvent: (event: RegisterDeviceScreenEvent) -> Unit,
+    onEvent: (event: ScanScreenEvent) -> Unit,
     scanAgainButtonText: String,
     modifier: Modifier = Modifier,
 ) {

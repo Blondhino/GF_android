@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.registerdevice.ui
+package com.gadgetfactory.app.scan.ui
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
@@ -9,20 +9,20 @@ import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.AnyPermanentlyD
 import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.SomeDenied
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScanner
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.AdapterWarningDismissed
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.OnCheckPermissionsResult
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.OpenAppSettingsClicked
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.PermissionErrorDismissed
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.ScanAgainClick
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenEvent.StartScanClick
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenViewEffect
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenViewEffect.CheckBluetoothPermission
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenViewEffect.OpenAppSettings
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenViewEffect.ShowBluetoothAdapterWarning
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenViewEffect.ShowBluetoothPermissionError
-import com.gadgetfactory.app.registerdevice.ui.interaction.RegisterDeviceScreenViewEffect.ShowBluetoothPermissionWarning
-import com.gadgetfactory.app.registerdevice.ui.mapper.RegisterDeviceScreenUiMapper
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.AdapterWarningDismissed
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.OnCheckPermissionsResult
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.OpenAppSettingsClicked
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.PermissionErrorDismissed
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.ScanAgainClick
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.StartScanClick
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.CheckBluetoothPermission
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.OpenAppSettings
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothAdapterWarning
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionError
+import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionWarning
+import com.gadgetfactory.app.scan.ui.mapper.ScanScreenUiMapper
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,17 +32,17 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
-class RegisterDeviceViewModel(
-    private val uiMapper: RegisterDeviceScreenUiMapper,
+class ScanViewModel(
+    private val uiMapper: ScanScreenUiMapper,
     private val gadgetScanner: GadgetScanner,
 ) : ScreenModel {
 
     private val _uiState = MutableStateFlow(uiMapper.map())
     val uiState = _uiState.asStateFlow()
-    private val _viewEffect = Channel<RegisterDeviceScreenViewEffect>(Channel.BUFFERED)
+    private val _viewEffect = Channel<ScanScreenViewEffect>(Channel.BUFFERED)
     val viewEffect = _viewEffect.receiveAsFlow()
 
-    fun onEvent(event: RegisterDeviceScreenEvent) {
+    fun onEvent(event: ScanScreenEvent) {
         when (event) {
             is StartScanClick -> screenModelScope.launch { _viewEffect.send(CheckBluetoothPermission) }
             is OnCheckPermissionsResult -> event.results.handlePermissionsResults()

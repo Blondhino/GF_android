@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.registerdevice.ui.components
+package com.gadgetfactory.app.scan.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

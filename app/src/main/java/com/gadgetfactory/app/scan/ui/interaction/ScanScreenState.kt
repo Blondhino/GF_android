@@ -1,9 +1,9 @@
-package com.gadgetfactory.app.registerdevice.ui.interaction
+package com.gadgetfactory.app.scan.ui.interaction
 
 import com.gadgetfactory.app.core.bluetooth.scanner.FoundGadget
 import com.gadgetfactory.app.ui.global.snack.SnackbarPayload
 
-data class RegisterDeviceScreenState(
+data class ScanScreenState(
     val isScanning: Boolean,
     val isButtonVisible: Boolean,
     val buttonText: String,

@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.registerdevice.ui
+package com.gadgetfactory.app.scan.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,29 +9,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import com.gadgetfactory.app.registerdevice.ui.components.RegisterDeviceScreenContent
-import com.gadgetfactory.app.registerdevice.ui.components.RegisterDeviceViewEffectHandler
+import com.gadgetfactory.app.scan.ui.components.ScanScreenContent
+import com.gadgetfactory.app.scan.ui.components.ScanViewEffectHandler
 import com.gadgetfactory.app.ui.global.GlobalUi
 import org.koin.compose.koinInject
 
-class RegisterDeviceScreen : Screen {
+class ScanScreen : Screen {
 
     @Composable
     override fun Content() = Box(
         modifier = Modifier.fillMaxSize(),
     ) {
-        val viewModel: RegisterDeviceViewModel = koinScreenModel()
+        val viewModel: ScanViewModel = koinScreenModel()
         val globalUi: GlobalUi = koinInject()
         val uiState by viewModel.uiState.collectAsState()
 
-        RegisterDeviceViewEffectHandler(
+        ScanViewEffectHandler(
             viewModel = viewModel,
             globalUi = globalUi,
             uiState = uiState,
             context = LocalContext.current,
         )
 
-        RegisterDeviceScreenContent(
+        ScanScreenContent(
             modifier = Modifier.fillMaxSize(),
             uiState = uiState,
             onEvent = viewModel::onEvent,
