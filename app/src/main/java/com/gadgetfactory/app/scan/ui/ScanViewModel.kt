@@ -1,5 +1,6 @@
 package com.gadgetfactory.app.scan.ui
 
+import android.annotation.SuppressLint
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions
@@ -52,8 +53,8 @@ class ScanViewModel(
             is OpenAppSettingsClicked -> handleAppSettingsClicked()
             is AdapterWarningDismissed -> _uiState.update { it.copy(isButtonVisible = true) }
             is OnGadgetCLicked -> {
-                screenModelScope.launch { _viewEffect.send(GoToConnectPage(event.device)) }
                 gadgetScanner.stopScanning()
+                screenModelScope.launch { _viewEffect.send(GoToConnectPage(event.device)) }
             }
 
             is ScanAgainClick -> {
@@ -84,6 +85,7 @@ class ScanViewModel(
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun startWithScanning() = gadgetScanner.discoverGadgets(
         scanDuration = 15.seconds,
         onScanStarted = { _uiState.update { uiMapper.map(isScanning = true) } },

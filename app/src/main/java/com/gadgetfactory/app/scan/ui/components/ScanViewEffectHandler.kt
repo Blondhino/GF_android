@@ -97,7 +97,7 @@ fun ScanViewEffectHandler(
                 }
 
                 is ScanScreenViewEffect.GoToConnectPage -> navigator.push(
-                    ConnectScreen(it.gadget),
+                    ConnectScreen(it.gadget.address),
                 )
             }
         }

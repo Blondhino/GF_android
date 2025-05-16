@@ -1,5 +1,6 @@
 package com.gadgetfactory.app.core.bluetooth.scanner
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
@@ -8,6 +9,7 @@ import android.content.Context
 import android.content.Context.BLUETOOTH_SERVICE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.checkSelfPermission
 import arrow.core.Either
@@ -20,6 +22,7 @@ import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.AdapterEr
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.PermissionDenied
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerError.ScannerError
 import com.gadgetfactory.app.core.ui.components.ImageType
+import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +30,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 import kotlin.time.Duration
 
+@SuppressLint("MissingPermission")
 class GadgetScannerImpl(
     private val context: Context,
 ) : GadgetScanner {
@@ -34,6 +38,18 @@ class GadgetScannerImpl(
     private var currentScanner: BluetoothLeScanner? = null
     private var currentCallback: ScanCallback? = null
     private var onScanStoppedCallback: (() -> Unit) = {}
+    private var scanningScope: ProducerScope<List<FoundGadget>>? = null
+    val foundDevices = mutableMapOf<String, FoundGadget>()
+
+    private fun resetScannerState() {
+        currentCallback?.let { callback ->
+            currentScanner?.stopScan(callback)
+            Log.d("BLE_RESULT", "🛑 Prethodni sken zaustavljen")
+        }
+        currentScanner = null
+        currentCallback = null
+        onScanStoppedCallback = {}
+    }
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun discoverGadgets(
@@ -44,9 +60,10 @@ class GadgetScannerImpl(
         checkPermission().bind()
         val scanner = getScanner().bind()
         currentScanner = scanner
+        resetScannerState()
         onScanStoppedCallback = onScanStopped
-        val foundDevices = mutableMapOf<String, FoundGadget>()
         return callbackFlow {
+            scanningScope = this
             val scanCallback = object : ScanCallback() {
                 override fun onScanResult(
                     callbackType: Int,
@@ -54,7 +71,7 @@ class GadgetScannerImpl(
                 ) {
                     checkPermission().bind()
                     val device = result.device ?: return
-                    val name = device.name.orEmpty()
+                    val name = result.scanRecord?.deviceName.orEmpty()
 
                     if (name.startsWith(GADGET_FACTORY_PREFIX)) {
                         foundDevices[device.address] = FoundGadget(
@@ -71,22 +88,27 @@ class GadgetScannerImpl(
             onScanStarted()
             launch {
                 delay(scanDuration)
+                Log.d("BLE_RESULT", "🛑 Stopping scanner - timeout")
+                scanner.stopScan(scanCallback)
+                onScanStopped()
                 close()
             }
 
             awaitClose {
+                Log.d("BLE_RESULT", "🛑 Await close of scanner")
                 scanner.stopScan(scanCallback)
                 onScanStopped()
+                close()
             }
         }.right()
     }
 
     override fun stopScanning() {
-        currentScanner?.let { scanner ->
-            checkPermission()
-            scanner.stopScan(currentCallback)
-            onScanStoppedCallback()
-        }
+        Log.d("BLE_RESULT", "🛑 Stopping scanner")
+        currentScanner?.stopScan(currentCallback)
+        onScanStoppedCallback
+        scanningScope?.close()
+        resetScannerState()
     }
 
     private fun mapImage(deviceName: String): ImageType.Resource = when (deviceName) {
@@ -104,6 +126,7 @@ class GadgetScannerImpl(
         val adapter = bluetoothManager.adapter
         ensure(adapter != null) { AdapterError }
         ensure(adapter.isEnabled) { AdapterError }
+        ensure(adapter.bluetoothLeScanner != null) { ScannerError }
         val scanner = adapter.bluetoothLeScanner
         ensure(scanner != null) { ScannerError }
         scanner
