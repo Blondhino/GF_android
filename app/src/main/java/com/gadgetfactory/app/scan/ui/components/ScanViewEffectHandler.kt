@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.gadgetfactory.app.connect.ConnectScreen
+import com.gadgetfactory.app.connect.ui.ConnectScreen
 import com.gadgetfactory.app.core.bluetooth.getRequiredBluetoothPermissions
 import com.gadgetfactory.app.core.bluetooth.rememberBluetoothPermissionLauncher
 import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Error
@@ -16,6 +16,7 @@ import com.gadgetfactory.app.core.ui.global.GlobalUi
 import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.SetBackgroundColorMode
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarController
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarMessage
+import com.gadgetfactory.app.core.utils.openAppSettings
 import com.gadgetfactory.app.scan.ui.ScanViewModel
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenEvent.AdapterWarningDismissed
@@ -28,7 +29,6 @@ import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.OpenAppSet
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothAdapterWarning
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionError
 import com.gadgetfactory.app.scan.ui.interaction.ScanScreenViewEffect.ShowBluetoothPermissionWarning
-import openAppSettings
 
 @Composable
 fun ScanViewEffectHandler(
@@ -97,7 +97,10 @@ fun ScanViewEffectHandler(
                 }
 
                 is ScanScreenViewEffect.GoToConnectPage -> navigator.push(
-                    ConnectScreen(it.gadget.address),
+                    ConnectScreen(
+                        gadgetAddress = it.gadget.address,
+                        deviceName = it.gadget.name,
+                    ),
                 )
             }
         }

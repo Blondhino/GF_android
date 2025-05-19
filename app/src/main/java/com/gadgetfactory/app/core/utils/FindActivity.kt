@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.core
+package com.gadgetfactory.app.core.utils
 
 import android.app.Activity
 import android.content.Context

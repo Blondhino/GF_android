@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.core
+package com.gadgetfactory.app.core.utils
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow

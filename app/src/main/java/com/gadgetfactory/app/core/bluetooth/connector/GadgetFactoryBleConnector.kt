@@ -11,10 +11,8 @@ import android.bluetooth.BluetoothProfile.STATE_CONNECTED
 import android.content.Context
 import android.content.Context.BLUETOOTH_SERVICE
 import android.util.Log
-import com.gadgetfactory.app.core.bluetooth.connector.ConnectorError.BleAdapterNotFound
 import com.gadgetfactory.app.core.bluetooth.connector.ConnectorError.CharacteristicsNotFound
 import com.gadgetfactory.app.core.bluetooth.connector.ConnectorError.LiveDataStreamDisabled
-import com.gadgetfactory.app.core.bluetooth.connector.ConnectorError.UnableToConnectWithBleDevice
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -34,11 +32,11 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
 
     override fun connectWithDevice(
         address: String,
-        onError: (ConnectorError) -> Unit,
-        onConnected: () -> Unit,
-    ) {
+    ): Flow<DeviceBleConnectionState> = callbackFlow {
         isConnectingProcessActive = true
         shouldKeepConnectionAlive = true
+
+        trySend(DeviceBleConnectionState.Connecting)
         adapter?.let { bleAdapter ->
             bleAdapter.getRemoteDevice(address)?.connectGatt(
                 context,
@@ -55,9 +53,10 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                         } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                             if (shouldKeepConnectionAlive) {
                                 Log.d("BLE_RESULT", "🔌 Disconnected --> automatic reconnect")
-                                connectWithDevice(address, onError, onConnected)
+                                connectWithDevice(address)
                             } else {
                                 Log.d("BLE_RESULT", "🔌 Disconnected")
+                                trySend(DeviceBleConnectionState.Disconnected)
                             }
                         }
                     }
@@ -74,8 +73,10 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                             service?.getCharacteristic(NOTIFY_CHARACTERISTIC_UUID)
 
                         if (commandCharacteristic == null || notifyCharacteristic == null) {
-                            onError(CharacteristicsNotFound)
-                            return
+                            trySend(
+                                DeviceBleConnectionState.UnableToConnect(CharacteristicsNotFound),
+                            )
+                            close()
                         }
                         gatt.setCharacteristicNotification(notifyCharacteristic, true)
                         notifyCharacteristic?.let {
@@ -84,7 +85,7 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                                 BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
                             gatt.writeDescriptor(descriptor)
 
-                            onConnected()
+                            trySend(DeviceBleConnectionState.Connected)
                         }
                     }
 
@@ -94,7 +95,12 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                         status: Int,
                     ) {
                         if (status != BluetoothGatt.GATT_SUCCESS) {
-                            onError(LiveDataStreamDisabled)
+                            trySend(
+                                DeviceBleConnectionState.UnableToConnect(
+                                    LiveDataStreamDisabled,
+                                ),
+                            )
+                            close()
                         }
                     }
 
@@ -108,11 +114,19 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                         }
                     }
                 },
-            ) ?: onError(UnableToConnectWithBleDevice)
-        } ?: onError(BleAdapterNotFound)
+            )
+        }
+
+        awaitClose {
+            isConnectingProcessActive = false
+            shouldKeepConnectionAlive = false
+            currentGatt?.close()
+            currentGatt = null
+        }
     }
 
-    override fun scanWiFiNetworks(): Flow<String> {
+    override fun scanWiFiNetworks(): Flow<List<String>> {
+        var availableNetworks: MutableSet<String> = mutableSetOf()
         commandCharacteristic?.let {
             it.value = SCAN_WIFI_COMMAND.toByteArray(Charsets.UTF_8)
             currentGatt?.writeCharacteristic(commandCharacteristic)
@@ -120,7 +134,8 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
         return callbackFlow {
             onWifiNetworkFoundCallback = { ssid ->
                 if (isConnectingProcessActive) {
-                    trySend(ssid)
+                    availableNetworks.add(ssid)
+                    trySend(availableNetworks.toList())
                 }
             }
             awaitClose {

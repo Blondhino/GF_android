@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat.checkSelfPermission
 import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.AllGranted
 import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.AnyPermanentlyDenied
 import com.gadgetfactory.app.core.bluetooth.BluetoothPermissions.SomeDenied
-import com.gadgetfactory.app.core.findActivity
+import com.gadgetfactory.app.core.utils.findActivity
 
 fun Map<String, @JvmSuppressWildcards Boolean>.checkPermissionsResults(
     context: Context,

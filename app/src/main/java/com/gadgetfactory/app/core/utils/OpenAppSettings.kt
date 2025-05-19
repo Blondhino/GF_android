@@ -1,3 +1,5 @@
+package com.gadgetfactory.app.core.utils
+
 import android.content.Context
 import android.content.Intent
 import android.net.Uri

@@ -3,7 +3,7 @@ package com.gadgetfactory.app.dashboard.ui
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.gadgetfactory.app.auth.domain.usecase.Logout
-import com.gadgetfactory.app.core.OnetimeWhileSubscribed
+import com.gadgetfactory.app.core.utils.OnetimeWhileSubscribed
 import com.gadgetfactory.app.dashboard.data.mapper.DashboardHeaderMapper
 import com.gadgetfactory.app.dashboard.data.mapper.DashboardUiMapper
 import com.gadgetfactory.app.dashboard.domain.GetDashboardHeader

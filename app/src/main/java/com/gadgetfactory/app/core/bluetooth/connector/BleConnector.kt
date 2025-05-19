@@ -5,11 +5,9 @@ import kotlinx.coroutines.flow.Flow
 interface BleConnector {
     fun connectWithDevice(
         address: String,
-        onError: (ConnectorError) -> Unit,
-        onConnected: () -> Unit,
-    )
+    ): Flow<DeviceBleConnectionState>
 
-    fun scanWiFiNetworks(): Flow<String>
+    fun scanWiFiNetworks(): Flow<List<String>>
     fun stopScanningWiFiNetworks()
     fun disconnectCurrentDevice()
 }
@@ -25,7 +23,7 @@ sealed interface DeviceBleConnectionState {
     data object Connecting : DeviceBleConnectionState
     data object Connected : DeviceBleConnectionState
     data object Disconnected : DeviceBleConnectionState
-    data class UnableToConnect(val message: String) : DeviceBleConnectionState
+    data class UnableToConnect(val error: ConnectorError) : DeviceBleConnectionState
 }
 
 sealed interface DeviceWiFiConnectionState {

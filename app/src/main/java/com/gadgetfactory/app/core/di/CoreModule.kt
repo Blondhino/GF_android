@@ -1,5 +1,7 @@
-package com.gadgetfactory.app.core
+package com.gadgetfactory.app.core.di
 
+import com.gadgetfactory.app.core.bluetooth.connector.BleConnector
+import com.gadgetfactory.app.core.bluetooth.connector.GadgetFactoryBleConnector
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScanner
 import com.gadgetfactory.app.core.bluetooth.scanner.GadgetScannerImpl
 import com.gadgetfactory.app.core.dictionary.Dictionary
@@ -26,6 +28,7 @@ val coreModule = module {
     singleOf(::LocalStringResources) bind StringResources::class
     single { buildHttpClient().configureToken(get()) }
     factoryOf(::GadgetScannerImpl) bind GadgetScanner::class
+    singleOf(::GadgetFactoryBleConnector) bind BleConnector::class
 }
 
 private fun HttpClient.configureToken(auth: FirebaseAuth): HttpClient = apply {
