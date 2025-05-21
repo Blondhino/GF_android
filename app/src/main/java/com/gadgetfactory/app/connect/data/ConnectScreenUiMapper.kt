@@ -4,10 +4,10 @@ import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenHeaderState
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState.Content
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState.Error
-import com.gadgetfactory.app.core.bluetooth.connector.DeviceBleConnectionState
-import com.gadgetfactory.app.core.bluetooth.connector.DeviceBleConnectionState.Connected
-import com.gadgetfactory.app.core.bluetooth.connector.DeviceBleConnectionState.Connecting
-import com.gadgetfactory.app.core.bluetooth.connector.DeviceBleConnectionState.UnableToConnect
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connected
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connecting
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.UnableToConnect
 import com.gadgetfactory.app.core.utils.mapGFDeviceImage
 
 class ConnectScreenUiMapper {

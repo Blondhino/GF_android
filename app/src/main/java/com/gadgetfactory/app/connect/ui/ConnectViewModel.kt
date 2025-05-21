@@ -1,5 +1,6 @@
 package com.gadgetfactory.app.connect.ui
 
+import android.util.Log
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.gadgetfactory.app.connect.data.ConnectScreenUiMapper
@@ -9,7 +10,7 @@ import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState.Loading
 import com.gadgetfactory.app.connect.ui.interaction.ConnectViewEffect
 import com.gadgetfactory.app.connect.ui.interaction.ConnectViewEffect.HideHeader
 import com.gadgetfactory.app.core.bluetooth.connector.BleConnector
-import com.gadgetfactory.app.core.bluetooth.connector.DeviceBleConnectionState.Connected
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connected
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ConnectViewModel(
@@ -50,7 +52,16 @@ class ConnectViewModel(
 
     fun onEvent(event: ConnectScreenEvent) {
         when (event) {
-            is WiFiNetworkSelected -> {}
+            is WiFiNetworkSelected -> screenModelScope.launch {
+                Log.d("WiFiNetworkSelected", event.ssid)
+                bleConnector.stopScanningWiFiNetworks()
+                bleConnector.provideWiFiCredentialsAndConnect(
+                    ssid = event.ssid,
+                    password = "59250783958304362343",
+                ).collect {
+                    Log.d("WiFiNetworkSelected", "vm: $it")
+                }
+            }
         }
     }
 
