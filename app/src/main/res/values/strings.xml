@@ -19,5 +19,12 @@
     <string name="bluetooth_adapter_error_title">Turn on Bluetooth</string>
     <string name="device_not_found_question">Didn\'t find your device ?</string>
     <string name="ready_to_connect">Ready to connect</string>
+    <string name="password_screen_message">Enter WiFi password</string>
+    <string name="password_screen_input_field_hint">Enter password</string>
+    <string name="password_screen_invalid_password_title">Unable to connect</string>
+    <string name="password_screen_invalid_password_message">Please check your password and try again</string>
+    <string name="provide_wifi_credentials">"Provide WiFi credentials "</string>
+    <string name="gathering_device_info">Gathering device info</string>
+    <string name="connecting_device_to_the_network">Connecting device to the network ....</string>
 
 </resources>

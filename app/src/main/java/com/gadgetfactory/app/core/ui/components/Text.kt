@@ -180,3 +180,19 @@ fun TitleLargeText(
         overflow = overflow,
     )
 }
+
+sealed interface TextStyleType {
+    data object BodyExtraSmall : TextStyleType
+    data object BodySmall : TextStyleType
+    data object BodyMedium : TextStyleType
+    data object BodyLarge : TextStyleType
+    data object TitleLarge : TextStyleType
+}
+
+fun getTextStyle(textStyleType: TextStyleType): TextStyle = when (textStyleType) {
+    TextStyleType.BodyExtraSmall -> BodyExtraSmallTextStyle
+    TextStyleType.BodySmall -> BodySmallTextStyle
+    TextStyleType.BodyMedium -> BodyMediumTextStyle
+    TextStyleType.BodyLarge -> BodyLargeTextStyle
+    TextStyleType.TitleLarge -> TitleLargeTextStyle
+}

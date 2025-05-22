@@ -148,8 +148,8 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
         awaitClose {
             isConnectingProcessActive = false
             shouldKeepConnectionAlive = false
-            currentGatt?.close()
-            currentGatt = null
+            //     currentGatt?.close()
+            //     currentGatt = null
         }
     }
 

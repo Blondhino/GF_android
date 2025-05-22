@@ -1,5 +1,6 @@
 package com.gadgetfactory.app.connect.data
 
+import com.gadgetfactory.app.R
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenHeaderState
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState.Content
@@ -8,9 +9,12 @@ import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionS
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connected
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connecting
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.UnableToConnect
+import com.gadgetfactory.app.core.dictionary.Dictionary
 import com.gadgetfactory.app.core.utils.mapGFDeviceImage
 
-class ConnectScreenUiMapper {
+class ConnectScreenUiMapper(
+    val dictionary: Dictionary,
+) {
 
     fun map(
         bleConnectingState: DeviceBleConnectionState,
@@ -41,6 +45,10 @@ class ConnectScreenUiMapper {
         isLoading = bleConnectingState == Connecting ||
             (bleConnectingState == Connected && availableNetworks.isEmpty()),
         deviceName = deviceName,
-        message = if (availableNetworks.isEmpty()) "Gathering device info" else "Provide WiFi credentials ",
+        message = if (availableNetworks.isEmpty()) {
+            dictionary.getString(R.string.gathering_device_info)
+        } else {
+            dictionary.getString(R.string.provide_wifi_credentials)
+        },
     )
 }

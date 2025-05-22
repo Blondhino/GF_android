@@ -5,4 +5,5 @@ sealed interface DeviceWiFiConnectionState {
     data object Connecting : DeviceWiFiConnectionState
     data object Connected : DeviceWiFiConnectionState
     data object UnableToConnect : DeviceWiFiConnectionState
+    data object Disconnected : DeviceWiFiConnectionState
 }
