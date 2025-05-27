@@ -26,5 +26,9 @@
     <string name="provide_wifi_credentials">"Provide WiFi credentials "</string>
     <string name="gathering_device_info">Gathering device info</string>
     <string name="connecting_device_to_the_network">Connecting device to the network ....</string>
+    <string name="reaching_backend_message">Talking to Gadget Factory backend ...</string>
+    <string name="password_screen_unresponsive_backend_message">We are currently unable to connect Gadget Factory server. Please try again later</string>
+    <string name="password_screen_successful_title">Device added successfully !</string>
+    <string name="password_screen_successful_message">Your device is now ready for use</string>
 
 </resources>

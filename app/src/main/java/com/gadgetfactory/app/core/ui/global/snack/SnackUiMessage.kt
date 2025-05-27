@@ -31,8 +31,8 @@ import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
-import com.gadgetfactory.app.core.ui.components.BodyLargeText
 import com.gadgetfactory.app.core.ui.components.BodyMediumText
+import com.gadgetfactory.app.core.ui.components.BodySmallText
 import com.gadgetfactory.app.core.ui.components.Image
 import com.gadgetfactory.app.core.ui.components.ImageType
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.ErrorSnackbar
@@ -112,8 +112,8 @@ fun SnackUiMessage(
                 verticalArrangement = Arrangement.spacedBy(3.dp),
                 modifier = Modifier.padding(vertical = 5.dp),
             ) {
-                BodyLargeText(text = payload.title, color = Frost, fontWeight = SemiBold)
-                BodyMediumText(text = payload.message, color = Frost, fontWeight = Normal)
+                BodyMediumText(text = payload.title, color = Frost, fontWeight = SemiBold)
+                BodySmallText(text = payload.message, color = Frost, fontWeight = Normal)
                 payload.actionTitle?.let {
                     ActionText(
                         onAction = onAction,

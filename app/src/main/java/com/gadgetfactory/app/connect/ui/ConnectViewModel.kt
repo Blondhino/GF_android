@@ -62,9 +62,7 @@ class ConnectViewModel(
     fun onEvent(event: ConnectScreenEvent) {
         when (event) {
             is WiFiNetworkSelected -> screenModelScope.launch {
-                _viewEffects.send(
-                    OpenPasswordScreen(selectedWiFi = event.ssid),
-                )
+                _viewEffects.send(OpenPasswordScreen(selectedWiFi = event.ssid))
             }
         }
     }

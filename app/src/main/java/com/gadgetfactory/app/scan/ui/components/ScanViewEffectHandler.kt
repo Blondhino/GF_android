@@ -66,8 +66,8 @@ fun ScanViewEffectHandler(
                     globalUi.tryEmitUiEvent(SetBackgroundColorMode(Error))
                     SnackbarController.pushSnackMessage(
                         SnackbarMessage(
-                            duration = SnackbarDuration.Indefinite,
                             payload = uiState.bluetoothPermissionError,
+                            duration = SnackbarDuration.Indefinite,
                             onDismiss = {
                                 globalUi.tryEmitUiEvent(SetBackgroundColorMode(Normal))
                                 viewModel.onEvent(PermissionErrorDismissed)

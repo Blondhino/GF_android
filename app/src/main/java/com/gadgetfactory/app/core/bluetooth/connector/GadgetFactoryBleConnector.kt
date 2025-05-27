@@ -10,13 +10,17 @@ import android.bluetooth.BluetoothProfile
 import android.bluetooth.BluetoothProfile.STATE_CONNECTED
 import android.content.Context
 import android.content.Context.BLUETOOTH_SERVICE
-import android.util.Log
 import com.gadgetfactory.app.core.bluetooth.connector.model.ConnectorError.CharacteristicsNotFound
 import com.gadgetfactory.app.core.bluetooth.connector.model.ConnectorError.LiveDataStreamDisabled
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceInfo
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.ConnectedToBackend
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.ConnectedToWiFi
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.Connecting
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.ReachingBackend
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.SendingCredentials
+import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.UnableToConnectWiFi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -33,9 +37,12 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
     private var wifiScanResultCharacteristic: BluetoothGattCharacteristic? = null
     private var ssidCharacteristic: BluetoothGattCharacteristic? = null
     private var passCharacteristic: BluetoothGattCharacteristic? = null
+    private var apiKeyCharacteristic: BluetoothGattCharacteristic? = null
     private var wifiConnectionResultCharacteristic: BluetoothGattCharacteristic? = null
+    private var macAddressResultCharacteristic: BluetoothGattCharacteristic? = null
     private var onWifiNetworkFoundCallback: (String) -> Unit = {}
-    private var onWifiNetworkConnectionStateChanged: (isConnected: Boolean) -> Unit = {}
+    private var onWifiNetworkConnectionStateChanged: (state: String) -> Unit = {}
+    private var onDeviceInfoFragmentReceived: (infoFragment: String) -> Unit = {}
     private var shouldKeepConnectionAlive: Boolean = true
     private var isConnectingProcessActive: Boolean = false
 
@@ -61,10 +68,8 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                             gatt.discoverServices()
                         } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                             if (shouldKeepConnectionAlive) {
-                                Log.d("BLE_RESULT", "🔌 Disconnected --> automatic reconnect")
                                 connectWithDevice(address)
                             } else {
-                                Log.d("BLE_RESULT", "🔌 Disconnected")
                                 trySend(DeviceBleConnectionState.Disconnected)
                             }
                         }
@@ -84,13 +89,19 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                             service?.getCharacteristic(SSID_CHARACTERISTIC_UUID)
                         passCharacteristic =
                             service?.getCharacteristic(PASS_CHARACTERISTIC_UUID)
+                        apiKeyCharacteristic =
+                            service?.getCharacteristic(API_KEY_CHARACTERISTIC_UUID)
                         wifiConnectionResultCharacteristic =
                             service?.getCharacteristic(WIFI_CONNECT_RESULT_CHARACTERISTIC_UUID)
+                        macAddressResultCharacteristic =
+                            service?.getCharacteristic(MAC_AND_TYPE_CHARACTERISTIC_UUID)
                         if (commandCharacteristic == null ||
                             wifiScanResultCharacteristic == null ||
                             ssidCharacteristic == null ||
                             passCharacteristic == null ||
-                            wifiConnectionResultCharacteristic == null
+                            wifiConnectionResultCharacteristic == null ||
+                            macAddressResultCharacteristic == null ||
+                            apiKeyCharacteristic == null
                         ) {
                             trySend(
                                 DeviceBleConnectionState.UnableToConnect(CharacteristicsNotFound),
@@ -99,6 +110,12 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                         }
                         gatt.setCharacteristicNotification(wifiScanResultCharacteristic, true)
                         gatt.setCharacteristicNotification(wifiConnectionResultCharacteristic, true)
+                        gatt.setCharacteristicNotification(macAddressResultCharacteristic, true)
+                        macAddressResultCharacteristic?.let {
+                            val descriptor = it.getDescriptor(CCC_DESCRIPTOR_UUID)
+                            descriptor?.value = BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE
+                            gatt.writeDescriptor(descriptor)
+                        }
                         wifiScanResultCharacteristic?.let {
                             val descriptor = it.getDescriptor(CCC_DESCRIPTOR_UUID)
                             descriptor?.value =
@@ -134,11 +151,11 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
                         }
                         if (characteristic.uuid == WIFI_CONNECT_RESULT_CHARACTERISTIC_UUID) {
                             val connectionResult = characteristic.value.toString(Charsets.UTF_8)
-                            if (connectionResult == WIFI_CONNECTION_SUCCESS) {
-                                onWifiNetworkConnectionStateChanged(true)
-                            } else if (connectionResult == WIFI_CONNECTION_FAILED) {
-                                onWifiNetworkConnectionStateChanged(false)
-                            }
+                            onWifiNetworkConnectionStateChanged(connectionResult)
+                        }
+                        if (characteristic.uuid == MAC_AND_TYPE_CHARACTERISTIC_UUID) {
+                            val macAddress = characteristic.value.toString(Charsets.UTF_8)
+                            onDeviceInfoFragmentReceived(macAddress)
                         }
                     }
                 },
@@ -148,8 +165,6 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
         awaitClose {
             isConnectingProcessActive = false
             shouldKeepConnectionAlive = false
-            //     currentGatt?.close()
-            //     currentGatt = null
         }
     }
 
@@ -176,15 +191,29 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
         }
     }
 
-    override fun stopScanningWiFiNetworks() {
-        commandCharacteristic?.let {
-            it.value = STOP_SCAN_WIFI_COMMAND.toByteArray(Charsets.UTF_8)
-            currentGatt?.writeCharacteristic(commandCharacteristic)
+    override fun getDeviceInfo(): Flow<DeviceInfo> = callbackFlow {
+        var deviceInfo = DeviceInfo(
+            mac = "",
+            type = "",
+        )
+        onDeviceInfoFragmentReceived = {
+            if (it.startsWith("type=")) {
+                deviceInfo = deviceInfo.copy(type = it.removePrefix("type="))
+                trySend(deviceInfo)
+                close()
+            } else {
+                deviceInfo = deviceInfo.copy(mac = it)
+            }
         }
+        commandCharacteristic?.let {
+            it.value = GET_MAC_ADDRESS_COMMAND.toByteArray(Charsets.UTF_8)
+            currentGatt?.writeCharacteristic(it)
+        }
+
+        awaitClose {}
     }
 
     override fun disconnectCurrentDevice() {
-        Log.d("BLE_RESULT", "🔌 Disconnect called")
         isConnectingProcessActive = false
         shouldKeepConnectionAlive = false
         currentGatt?.disconnect()
@@ -206,14 +235,34 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
             currentGatt?.writeCharacteristic(passCharacteristic)
         }
         send(Connecting)
-        onWifiNetworkConnectionStateChanged = { isConnected ->
-            if (isConnected) {
-                trySend(DeviceWiFiConnectionState.Connected)
-            } else {
-                trySend(DeviceWiFiConnectionState.UnableToConnect)
+        onWifiNetworkConnectionStateChanged = { state ->
+            when (state) {
+                WIFI_CONNECTION_SUCCESS -> {
+                    trySend(ConnectedToWiFi)
+                    trySend(ReachingBackend)
+                }
+                WIFI_CONNECTION_FAILED -> trySend(UnableToConnectWiFi)
+                WS_CONNECTION_FAILED -> trySend(UnableToConnectWiFi)
+                WS_CONNECTION_SUCCESS -> {
+                    trySend(ConnectedToBackend)
+                    currentGatt?.disconnect()
+                    isConnectingProcessActive = false
+                    shouldKeepConnectionAlive = false
+                }
             }
         }
         awaitClose { }
+    }
+
+    override suspend fun provideUserIdAndApiKey(
+        id: String,
+        apiKey: String,
+    ) {
+        apiKeyCharacteristic?.let {
+            val apiKeyForSending = "apiKey:" + apiKey + "userId:" + id
+            it.value = apiKeyForSending.toByteArray(Charsets.UTF_8)
+            currentGatt?.writeCharacteristic(apiKeyCharacteristic)
+        }
     }
 
     companion object {
@@ -230,10 +279,16 @@ class GadgetFactoryBleConnector(private val context: Context) : BleConnector {
             UUID.fromString("00002aae-0000-1000-8000-00805f9b34fb")
         private val PASS_CHARACTERISTIC_UUID =
             UUID.fromString("00002aaf-0000-1000-8000-00805f9b34fb")
+        private val MAC_AND_TYPE_CHARACTERISTIC_UUID =
+            UUID.fromString("00002ab2-0000-1000-8000-00805f9b34fb")
+        private val API_KEY_CHARACTERISTIC_UUID =
+            UUID.fromString("00002ab1-0000-1000-8000-00805f9b34fb")
 
         private const val SCAN_WIFI_COMMAND = "start_scan_wifi"
-        private const val STOP_SCAN_WIFI_COMMAND = "stop_scan_wifi"
         private const val WIFI_CONNECTION_SUCCESS = "wifi_connected"
         private const val WIFI_CONNECTION_FAILED = "wifi_failed"
+        private const val WS_CONNECTION_SUCCESS = "ws_connected"
+        private const val WS_CONNECTION_FAILED = "ws_failed"
+        private const val GET_MAC_ADDRESS_COMMAND = "get_mac"
     }
 }

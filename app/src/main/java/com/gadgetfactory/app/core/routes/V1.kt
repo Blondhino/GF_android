@@ -17,4 +17,10 @@ object V1 {
     class GetRooms(
         val parent: V1 = V1,
     )
+
+    @Serializable
+    @Resource("/register-device")
+    class RegisterDevice(
+        val parent: V1 = V1,
+    )
 }

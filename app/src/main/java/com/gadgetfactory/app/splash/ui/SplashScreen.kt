@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.splash
+package com.gadgetfactory.app.splash.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

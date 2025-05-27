@@ -114,5 +114,6 @@ sealed class BackgroundColorMode(val colors: List<Color>) {
     data object Normal : BackgroundColorMode(listOf(Color(0x99181449), Color(0x00080808)))
     data object Error : BackgroundColorMode(listOf(Color(0x99491414), Color(0x00080808)))
     data object Warning : BackgroundColorMode(listOf(Color(0x4DB07213), Color(0x00080808)))
+    data object Success : BackgroundColorMode(listOf(Color(0x4D13B028), Color(0x00080808)))
     data class Custom(val customColors: List<Color>) : BackgroundColorMode(customColors)
 }

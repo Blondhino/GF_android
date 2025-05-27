@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.password.interaction
+package com.gadgetfactory.app.password.ui.interaction
 
 import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenHeaderState
 

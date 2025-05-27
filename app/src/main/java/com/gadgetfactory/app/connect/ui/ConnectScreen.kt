@@ -18,7 +18,7 @@ import com.gadgetfactory.app.connect.ui.interaction.ConnectScreenState.Loading
 import com.gadgetfactory.app.connect.ui.interaction.ConnectViewEffect.OpenPasswordScreen
 import com.gadgetfactory.app.core.ui.components.BodySmallText
 import com.gadgetfactory.app.core.ui.components.RoundLoadingIndicator
-import com.gadgetfactory.app.password.PasswordScreen
+import com.gadgetfactory.app.password.ui.PasswordScreen
 import org.koin.core.parameter.parametersOf
 
 class ConnectScreen(

@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.password
+package com.gadgetfactory.app.password.ui
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Column
@@ -15,9 +15,12 @@ import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.gadgetfactory.app.connect.ui.components.ConnectScreenHeaderUiComponent
 import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Error
 import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Normal
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Success
 import com.gadgetfactory.app.core.ui.components.BodyMediumText
 import com.gadgetfactory.app.core.ui.components.PasswordTextField
 import com.gadgetfactory.app.core.ui.global.GlobalUi
@@ -25,12 +28,15 @@ import com.gadgetfactory.app.core.ui.global.GlobalUiEvent
 import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.SetBackgroundColorMode
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarController
 import com.gadgetfactory.app.core.ui.global.snack.SnackbarMessage
-import com.gadgetfactory.app.password.interaction.PasswordScreenEvent
-import com.gadgetfactory.app.password.interaction.PasswordScreenEvent.PasswordChanged
-import com.gadgetfactory.app.password.interaction.PasswordScreenEvent.PasswordSubmit
-import com.gadgetfactory.app.password.interaction.PasswordScreenState.Content
-import com.gadgetfactory.app.password.interaction.PasswordScreenState.Loading
-import com.gadgetfactory.app.password.interaction.PasswordScreenViewEffect.ShowSnackbar
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenEvent
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenEvent.PasswordChanged
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenEvent.PasswordSubmit
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenState.Content
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenState.Loading
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenViewEffect.GoToDashboard
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenViewEffect.SetErrorBackground
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenViewEffect.SetSuccessBackground
+import com.gadgetfactory.app.password.ui.interaction.PasswordScreenViewEffect.ShowSnackbar
 import org.koin.compose.koinInject
 import org.koin.core.parameter.parametersOf
 
@@ -44,12 +50,11 @@ class PasswordScreen(
         val viewModel: PasswordViewModel =
             koinScreenModel(parameters = { parametersOf(selectedWifiNetwork, deviceName) })
         val uiState by viewModel.uiState.collectAsState()
-
+        val navigator = LocalNavigator.currentOrThrow
         LaunchedEffect(Unit) {
             viewModel.viewEffects.collect {
                 when (it) {
                     is ShowSnackbar -> {
-                        globalUi.emitUiEvent(SetBackgroundColorMode(Error))
                         SnackbarController.pushSnackMessage(
                             message = SnackbarMessage(
                                 payload = it.payload,
@@ -57,6 +62,10 @@ class PasswordScreen(
                             ),
                         )
                     }
+
+                    is GoToDashboard -> navigator.popUntilRoot()
+                    is SetErrorBackground -> globalUi.emitUiEvent(SetBackgroundColorMode(Error))
+                    is SetSuccessBackground -> globalUi.emitUiEvent(SetBackgroundColorMode(Success))
                 }
             }
         }

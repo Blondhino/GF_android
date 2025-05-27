@@ -16,7 +16,7 @@ import com.gadgetfactory.app.core.ui.global.snack.ObserveSnackMessages
 import com.gadgetfactory.app.core.ui.global.snack.SnackUiMessage
 import com.gadgetfactory.app.core.ui.global.snack.toPayload
 import com.gadgetfactory.app.core.ui.theme.GadgetFactoryTheme
-import com.gadgetfactory.app.splash.SplashScreen
+import com.gadgetfactory.app.splash.ui.SplashScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

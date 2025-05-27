@@ -9,7 +9,6 @@ import android.content.Context
 import android.content.Context.BLUETOOTH_SERVICE
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.checkSelfPermission
 import arrow.core.Either
@@ -43,7 +42,6 @@ class GadgetScannerImpl(
     private fun resetScannerState() {
         currentCallback?.let { callback ->
             currentScanner?.stopScan(callback)
-            Log.d("BLE_RESULT", "🛑 Prethodni sken zaustavljen")
         }
         currentScanner = null
         currentCallback = null
@@ -87,14 +85,12 @@ class GadgetScannerImpl(
             onScanStarted()
             launch {
                 delay(scanDuration)
-                Log.d("BLE_RESULT", "🛑 Stopping scanner - timeout")
                 scanner.stopScan(scanCallback)
                 onScanStopped()
                 close()
             }
 
             awaitClose {
-                Log.d("BLE_RESULT", "🛑 Await close of scanner")
                 scanner.stopScan(scanCallback)
                 onScanStopped()
                 close()
@@ -103,7 +99,6 @@ class GadgetScannerImpl(
     }
 
     override fun stopScanning() {
-        Log.d("BLE_RESULT", "🛑 Stopping scanner")
         currentScanner?.stopScan(currentCallback)
         onScanStoppedCallback
         scanningScope?.close()

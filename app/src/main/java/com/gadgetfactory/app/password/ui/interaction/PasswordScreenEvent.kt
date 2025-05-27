@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.password.interaction
+package com.gadgetfactory.app.password.ui.interaction
 
 sealed interface PasswordScreenEvent {
     data class PasswordChanged(val password: String) : PasswordScreenEvent

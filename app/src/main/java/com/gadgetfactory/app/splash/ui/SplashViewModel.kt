@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.splash
+package com.gadgetfactory.app.splash.ui
 
 import arrow.core.Either
 import cafe.adriel.voyager.core.model.ScreenModel
