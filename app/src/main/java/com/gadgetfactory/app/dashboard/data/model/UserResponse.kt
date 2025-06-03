@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.dashboard.model.network
+package com.gadgetfactory.app.dashboard.data.model
 
 import kotlinx.serialization.Serializable
 

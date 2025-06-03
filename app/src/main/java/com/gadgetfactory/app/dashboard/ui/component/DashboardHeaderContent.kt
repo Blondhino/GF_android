@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.core.ui.components.ProfileInfoUiComponent
 import com.gadgetfactory.app.core.ui.components.TextPill
-import com.gadgetfactory.app.dashboard.model.ui.DashboardHeaderUiState
-import com.gadgetfactory.app.dashboard.model.ui.HeaderOption
+import com.gadgetfactory.app.dashboard.ui.model.DashboardHeaderUiState
+import com.gadgetfactory.app.dashboard.ui.model.HeaderOption
 
 @Composable
 fun GadgetCenterHeaderContent(

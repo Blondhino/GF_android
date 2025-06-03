@@ -4,7 +4,7 @@ import arrow.core.Either
 import com.gadgetfactory.app.core.networking.NetworkError
 import com.gadgetfactory.app.core.networking.safeApiCall
 import com.gadgetfactory.app.core.routes.V1
-import com.gadgetfactory.app.dashboard.model.network.RoomResponse
+import com.gadgetfactory.app.dashboard.data.model.RoomResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.resources.get

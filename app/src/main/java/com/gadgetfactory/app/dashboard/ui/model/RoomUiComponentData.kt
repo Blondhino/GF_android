@@ -1,4 +1,4 @@
-package com.gadgetfactory.app.dashboard.model.ui
+package com.gadgetfactory.app.dashboard.ui.model
 
 data class RoomUiComponentData(
     val roomName: String,

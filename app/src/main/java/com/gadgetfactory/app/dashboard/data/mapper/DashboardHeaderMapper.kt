@@ -1,7 +1,7 @@
 package com.gadgetfactory.app.dashboard.data.mapper
 
-import com.gadgetfactory.app.dashboard.model.ui.DashboardHeaderUiState
-import com.gadgetfactory.app.dashboard.model.ui.RoomUiComponentData
+import com.gadgetfactory.app.dashboard.ui.model.DashboardHeaderUiState
+import com.gadgetfactory.app.dashboard.ui.model.RoomUiComponentData
 
 class DashboardHeaderMapper {
     fun map(

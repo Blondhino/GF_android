@@ -7,4 +7,5 @@ import com.gadgetfactory.app.password.data.model.RegisterDeviceResponse
 
 interface DeviceRepository {
     suspend fun registerDevice(deviceInfo: DeviceInfo): Either<NetworkError, RegisterDeviceResponse>
+    suspend fun getMyDevices(): Either<NetworkError, List<DeviceDto>>
 }

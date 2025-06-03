@@ -1,10 +1,12 @@
-package com.gadgetfactory.app.dashboard.model.ui
+package com.gadgetfactory.app.dashboard.ui.model
+
+import com.gadgetfactory.app.dashboard.data.mapper.DevicesState
 
 sealed interface DashboardScreenState {
     data object Loading : DashboardScreenState
     data object Error : DashboardScreenState
     data class Content(
         val headerState: DashboardHeaderUiState,
-        val devices: List<Int>,
+        val devices: DevicesState,
     ) : DashboardScreenState
 }

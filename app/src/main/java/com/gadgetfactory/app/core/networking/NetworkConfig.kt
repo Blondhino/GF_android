@@ -6,6 +6,7 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.resources.Resources
+import io.ktor.client.plugins.websocket.WebSockets
 import io.ktor.client.request.header
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
@@ -18,6 +19,9 @@ fun <T : HttpClientEngineConfig> HttpClientConfig<T>.getClientConfig(
     defaultRequest {
         header(HttpHeaders.ContentType, ContentType.Application.Json)
         url(baseUrl)
+    }
+    install(WebSockets) {
+        pingInterval = 20_000L
     }
     install(HttpTimeout) { requestTimeoutMillis = TIMEOUT_MS }
     install(Resources)

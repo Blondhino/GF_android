@@ -16,7 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.core.ui.theme.SilverMist
-import com.gadgetfactory.app.dashboard.model.ui.HeaderOption
+import com.gadgetfactory.app.dashboard.ui.model.HeaderOption
 
 @Composable
 fun IconRoundedUiComponent(

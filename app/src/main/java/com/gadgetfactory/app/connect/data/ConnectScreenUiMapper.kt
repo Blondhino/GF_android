@@ -9,8 +9,8 @@ import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionS
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connected
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.Connecting
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceBleConnectionState.UnableToConnect
+import com.gadgetfactory.app.core.devices.mapGFDeviceImage
 import com.gadgetfactory.app.core.dictionary.Dictionary
-import com.gadgetfactory.app.core.utils.mapGFDeviceImage
 
 class ConnectScreenUiMapper(
     val dictionary: Dictionary,

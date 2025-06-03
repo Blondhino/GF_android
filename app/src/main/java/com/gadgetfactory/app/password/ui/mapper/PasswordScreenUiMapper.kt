@@ -7,8 +7,8 @@ import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnection
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.Disconnected
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.ReachingBackend
 import com.gadgetfactory.app.core.bluetooth.connector.model.DeviceWiFiConnectionState.UnableToConnectWiFi
+import com.gadgetfactory.app.core.devices.mapGFDeviceImage
 import com.gadgetfactory.app.core.dictionary.Dictionary
-import com.gadgetfactory.app.core.utils.mapGFDeviceImage
 import com.gadgetfactory.app.password.ui.interaction.PasswordScreenState
 
 class PasswordScreenUiMapper(

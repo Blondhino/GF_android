@@ -1,12 +1,12 @@
 package com.gadgetfactory.app.dashboard.data.mapper
 
-import com.gadgetfactory.app.dashboard.model.ui.DashboardHeaderUiState
-import com.gadgetfactory.app.dashboard.model.ui.DashboardScreenState
+import com.gadgetfactory.app.dashboard.ui.model.DashboardHeaderUiState
+import com.gadgetfactory.app.dashboard.ui.model.DashboardScreenState
 
 class DashboardUiMapper {
     fun map(
         headerState: DashboardHeaderUiState,
-        devices: List<Int>,
+        devices: DevicesState,
     ): DashboardScreenState =
         when (headerState) {
             is DashboardHeaderUiState.Content -> DashboardScreenState.Content(

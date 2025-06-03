@@ -23,4 +23,10 @@ object V1 {
     class RegisterDevice(
         val parent: V1 = V1,
     )
+
+    @Serializable
+    @Resource("/get-devices")
+    class MyDevices(
+        val parent: V1 = V1,
+    )
 }
