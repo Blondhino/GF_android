@@ -21,6 +21,7 @@ private val DarkColorScheme = darkColorScheme(
     error = Carmine,
     scrim = Amber,
     surfaceVariant = Lime,
+    onBackground = Silver,
 
 )
 

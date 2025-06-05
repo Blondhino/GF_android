@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -40,7 +39,7 @@ import com.gadgetfactory.app.dashboard.ui.interaction.DashboardViewEffect.Naviga
 import com.gadgetfactory.app.dashboard.ui.model.DashboardHeaderUiState
 import com.gadgetfactory.app.dashboard.ui.model.DashboardScreenState
 import com.gadgetfactory.app.dashboard.ui.model.DashboardScreenState.Content
-import com.gadgetfactory.app.details.DetailsScreen
+import com.gadgetfactory.app.details.ui.DetailsScreen
 import com.gadgetfactory.app.scan.ui.ScanScreen
 import org.koin.compose.koinInject
 
@@ -61,7 +60,7 @@ class DashboardScreen : Screen {
                     is NavigateToDetails -> navigator.push(
                         DetailsScreen(
                             userId = effect.userId,
-                            deviceId = effect.deviceId,
+                            deviceName = effect.deviceName,
                         ),
                     )
                 }

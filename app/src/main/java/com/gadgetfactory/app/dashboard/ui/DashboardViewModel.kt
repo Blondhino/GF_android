@@ -88,7 +88,7 @@ class DashboardViewModel(
 
     private fun openDetails(device: DeviceUiItem) = screenModelScope.launch {
         getCurrentUser().map { user ->
-            _viewEffect.send(NavigateToDetails(deviceId = device.id, userId = user.id))
+            _viewEffect.send(NavigateToDetails(deviceName = device.name, userId = user.id))
         }
     }
 
