@@ -19,10 +19,10 @@ import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.ScreenShown
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.SnackDismissed
 import com.gadgetfactory.app.auth.ui.mapper.AuthScreenUiMapper
 import com.gadgetfactory.app.auth.ui.mapper.GoogleLoginSnackErrorMapper
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Error
-import com.gadgetfactory.app.ui.components.BackgroundColorMode.Normal
-import com.gadgetfactory.app.ui.global.GlobalUi
-import com.gadgetfactory.app.ui.global.GlobalUiEvent.SetBackgroundColorMode
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Error
+import com.gadgetfactory.app.core.ui.components.BackgroundColorMode.Normal
+import com.gadgetfactory.app.core.ui.global.GlobalUi
+import com.gadgetfactory.app.core.ui.global.GlobalUiEvent.SetBackgroundColorMode
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

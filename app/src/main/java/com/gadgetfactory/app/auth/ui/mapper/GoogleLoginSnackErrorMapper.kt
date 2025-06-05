@@ -2,8 +2,8 @@ package com.gadgetfactory.app.auth.ui.mapper
 
 import com.gadgetfactory.app.R
 import com.gadgetfactory.app.core.dictionary.Dictionary
-import com.gadgetfactory.app.ui.global.snack.SnackbarPayload
-import com.gadgetfactory.app.ui.global.snack.SnackbarType.ErrorSnackbar
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarPayload
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarType.ErrorSnackbar
 
 class GoogleLoginSnackErrorMapper(
     private val dictionary: Dictionary,

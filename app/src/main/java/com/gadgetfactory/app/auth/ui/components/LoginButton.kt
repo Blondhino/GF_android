@@ -20,9 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
 import com.gadgetfactory.app.R
-import com.gadgetfactory.app.ui.components.BodyMediumText
-import com.gadgetfactory.app.ui.components.Image
-import com.gadgetfactory.app.ui.components.ImageType
+import com.gadgetfactory.app.core.ui.components.BodyMediumText
+import com.gadgetfactory.app.core.ui.components.Image
+import com.gadgetfactory.app.core.ui.components.ImageType
 
 @Composable
 fun LoginButton(
@@ -44,7 +44,9 @@ fun LoginButton(
     ) {
         data.providerIcon?.let {
             Image(
-                modifier = Modifier.size(32.dp).align(Alignment.CenterStart),
+                modifier = Modifier
+                    .size(32.dp)
+                    .align(Alignment.CenterStart),
                 imageType = ImageType.Resource(data.providerIcon),
             )
         }

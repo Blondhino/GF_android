@@ -1,0 +1,198 @@
+package com.gadgetfactory.app.core.ui.components
+
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.Bold
+import androidx.compose.ui.text.font.FontWeight.Companion.Medium
+import androidx.compose.ui.text.font.FontWeight.Companion.Normal
+import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
+import com.gadgetfactory.app.R
+
+private val gfFont = FontFamily(
+    Font(resId = R.font.montserrat_regular, weight = Normal),
+    Font(resId = R.font.montserrat_semibold, weight = SemiBold),
+    Font(resId = R.font.montserrat_bold, weight = Bold),
+    Font(resId = R.font.montserrat_medium, weight = Medium),
+)
+
+private val BodyExtraSmallTextStyle = TextStyle(
+    fontFamily = gfFont,
+    fontSize = 10.sp,
+    lineHeight = 12.sp,
+    fontWeight = Normal,
+)
+
+private val BodySmallTextStyle = TextStyle(
+    fontFamily = gfFont,
+    fontSize = 12.sp,
+    lineHeight = 14.sp,
+    fontWeight = Normal,
+)
+
+private val BodyMediumTextStyle = TextStyle(
+    fontFamily = gfFont,
+    fontSize = 16.sp,
+    lineHeight = 18.sp,
+    fontWeight = Normal,
+)
+
+private val BodyLargeTextStyle = TextStyle(
+    fontFamily = gfFont,
+    fontSize = 18.sp,
+    lineHeight = 20.sp,
+    fontWeight = Normal,
+)
+
+private val TitleLargeTextStyle = TextStyle(
+    fontFamily = gfFont,
+    fontSize = 22.sp,
+    lineHeight = 24.sp,
+    fontWeight = SemiBold,
+)
+
+@Composable
+fun BodyExtraSmallText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = BodyExtraSmallTextStyle.lineHeight,
+    fontWeight: FontWeight? = BodyExtraSmallTextStyle.fontWeight,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = color,
+        fontWeight = fontWeight,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        style = BodyExtraSmallTextStyle,
+        maxLines = maxLines,
+        overflow = overflow,
+    )
+}
+
+@Composable
+fun BodySmallText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = BodySmallTextStyle.lineHeight,
+    fontWeight: FontWeight? = BodySmallTextStyle.fontWeight,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = color,
+        fontWeight = fontWeight,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        style = BodySmallTextStyle,
+        maxLines = maxLines,
+        overflow = overflow,
+    )
+}
+
+@Composable
+fun BodyMediumText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = BodyMediumTextStyle.lineHeight,
+    fontWeight: FontWeight? = BodyMediumTextStyle.fontWeight,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = color,
+        fontWeight = fontWeight,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        style = BodyMediumTextStyle,
+        maxLines = maxLines,
+        overflow = overflow,
+    )
+}
+
+@Composable
+fun BodyLargeText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = BodyLargeTextStyle.lineHeight,
+    fontWeight: FontWeight? = BodyLargeTextStyle.fontWeight,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = color,
+        fontWeight = fontWeight,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        style = BodyLargeTextStyle,
+        maxLines = maxLines,
+        overflow = overflow,
+    )
+}
+
+@Composable
+fun TitleLargeText(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.tertiary,
+    textAlign: TextAlign? = null,
+    lineHeight: TextUnit = TitleLargeTextStyle.lineHeight,
+    fontWeight: FontWeight? = TitleLargeTextStyle.fontWeight,
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLines: Int = Int.MAX_VALUE,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        color = color,
+        fontWeight = fontWeight,
+        textAlign = textAlign,
+        lineHeight = lineHeight,
+        style = TitleLargeTextStyle,
+        maxLines = maxLines,
+        overflow = overflow,
+    )
+}
+
+sealed interface TextStyleType {
+    data object BodyExtraSmall : TextStyleType
+    data object BodySmall : TextStyleType
+    data object BodyMedium : TextStyleType
+    data object BodyLarge : TextStyleType
+    data object TitleLarge : TextStyleType
+}
+
+fun getTextStyle(textStyleType: TextStyleType): TextStyle = when (textStyleType) {
+    TextStyleType.BodyExtraSmall -> BodyExtraSmallTextStyle
+    TextStyleType.BodySmall -> BodySmallTextStyle
+    TextStyleType.BodyMedium -> BodyMediumTextStyle
+    TextStyleType.BodyLarge -> BodyLargeTextStyle
+    TextStyleType.TitleLarge -> TitleLargeTextStyle
+}

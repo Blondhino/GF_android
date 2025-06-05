@@ -34,10 +34,14 @@ android {
         }
 
         create("release") {
-            storeFile = project.rootProject.file("release/release.keystore")
+          /*  storeFile = project.rootProject.file("release/release.keystore")
             keyAlias = "gf_keystore"
             storePassword = System.getenv("GF_ANDROID_STORE_PASS")
-            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")
+            keyPassword = System.getenv("GF_ANDROID_KEY_PASS")*/
+            storeFile = file("../release/debug.keystore")
+            keyAlias = "gf_keystore"
+            storePassword = "debugPass"
+            keyPassword = "debugPass"
         }
     }
 
@@ -101,6 +105,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.bundles.ktor)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

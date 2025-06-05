@@ -35,14 +35,14 @@ import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.AuthProviderSel
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.GoogleAuthTokenReceived
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.GoogleTokenFetchFailed
 import com.gadgetfactory.app.auth.ui.interaction.AuthScreenEvent.SnackDismissed
-import com.gadgetfactory.app.gadgetcenter.ui.GadgetCenterScreen
-import com.gadgetfactory.app.ui.components.BodyLargeText
-import com.gadgetfactory.app.ui.components.BodySmallText
-import com.gadgetfactory.app.ui.components.Image
-import com.gadgetfactory.app.ui.components.ImageType
-import com.gadgetfactory.app.ui.components.RoundLoadingIndicator
-import com.gadgetfactory.app.ui.global.snack.SnackbarController
-import com.gadgetfactory.app.ui.global.snack.SnackbarMessage
+import com.gadgetfactory.app.core.ui.components.BodyLargeText
+import com.gadgetfactory.app.core.ui.components.BodySmallText
+import com.gadgetfactory.app.core.ui.components.Image
+import com.gadgetfactory.app.core.ui.components.ImageType
+import com.gadgetfactory.app.core.ui.components.RoundLoadingIndicator
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarController
+import com.gadgetfactory.app.core.ui.global.snack.SnackbarMessage
+import com.gadgetfactory.app.dashboard.ui.DashboardScreen
 import org.koin.compose.koinInject
 
 class AuthScreen : Screen {
@@ -66,7 +66,7 @@ class AuthScreen : Screen {
                         }.onLeft { viewModel.onEvent(GoogleTokenFetchFailed) }
                     }
 
-                    OpenGadgetCenter -> navigator.replace(GadgetCenterScreen())
+                    OpenGadgetCenter -> navigator.replace(DashboardScreen())
                     is ShowSnackMessage -> {
                         SnackbarController.pushSnackMessage(
                             message = SnackbarMessage(

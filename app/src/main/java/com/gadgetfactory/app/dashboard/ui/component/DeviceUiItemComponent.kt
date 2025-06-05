@@ -1,0 +1,77 @@
+package com.gadgetfactory.app.dashboard.ui.component
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight.Companion.SemiBold
+import androidx.compose.ui.unit.dp
+import com.gadgetfactory.app.R
+import com.gadgetfactory.app.core.ui.components.BodyExtraSmallText
+import com.gadgetfactory.app.core.ui.components.BodySmallText
+import com.gadgetfactory.app.core.ui.components.Image
+import com.gadgetfactory.app.core.ui.components.ImageType.Resource
+import com.gadgetfactory.app.core.ui.theme.SilverMist
+import com.gadgetfactory.app.dashboard.ui.model.DeviceUiItem
+
+@Composable
+fun DeviceUiItemComponent(
+    device: DeviceUiItem,
+    onDeviceClick: (gadget: DeviceUiItem) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(25))
+            .border(
+                1.dp,
+                color = MaterialTheme.colorScheme.onSurface,
+                shape = RoundedCornerShape(25),
+            )
+            .background(SilverMist)
+            .clickable { onDeviceClick(device) }
+            .padding(horizontal = 16.dp, vertical = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(25))
+                    .size(40.dp)
+                    .border(
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        shape = RoundedCornerShape(25),
+                    ),
+                contentScale = ContentScale.Crop,
+                imageType = Resource(device.image.resource),
+            )
+
+            Column(verticalArrangement = Arrangement.spacedBy(5.dp)) {
+                BodySmallText(text = device.name, fontWeight = SemiBold)
+                BodyExtraSmallText(
+                    text = stringResource(R.string.ready_for_use),
+                    color = MaterialTheme.colorScheme.onBackground,
+                )
+            }
+        }
+    }
+}
